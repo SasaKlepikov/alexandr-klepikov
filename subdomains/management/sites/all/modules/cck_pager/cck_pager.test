@@ -1,0 +1,121 @@
+<?php
+// $Id:$
+
+class CCKPagerTestCase extends DrupalWebTestCase {
+  protected $web_user;
+  protected $admin_user;
+
+  public static function getInfo() {
+    return array(
+      'name' => 'CCK Pager functionality',
+      'description' => 'Create a node with field and test cck pager.',
+      'group' => 'CCK Pager',
+    );
+  }
+
+  function setUp() {
+    parent::setUp('cck_pager');
+    $permissions = array(
+      'access content',
+      'administer content types', 
+      'administer nodes', 
+      'access administration pages', 
+      'create page content',
+      'edit any page content',
+    );
+    $this->admin_user = $this->drupalCreateUser($permissions);
+  }
+  
+  function testCCKPager() {
+    $this->drupalLogin($this->admin_user);
+    $name = strtolower($this->randomName());
+    $edit = array(
+      'fields[_add_new_field][label]' => $name,
+      'fields[_add_new_field][field_name]' => $name,
+      'fields[_add_new_field][type]' => 'text',
+      'fields[_add_new_field][widget_type]' => 'text_textfield',
+    );
+    $field_name = 'field_'. $name;
+    $this->drupalPost('admin/structure/types/manage/page/fields', $edit, t('Save'));
+    $this->drupalPost(NULL, array(), t('Save field settings'));
+    $this->drupalPost(NULL, array(), t('Save settings'));
+    
+    $this->assertRaw(t('Saved %label configuration', array('%label' => $name)), 'Field added');
+    node_types_rebuild();
+    menu_rebuild();
+    
+    $this->drupalGet('admin/structure/types/manage/page/fields/'. $field_name .'/field-settings');
+    $this->assertNoText(t('CCK Pager settings'), t('CCK Pager settings not avaiable with field cardinality equals to 1.'));
+    
+    $cardinality = 10;
+    
+    $edit = array(
+      'field[cardinality]' => $cardinality
+    );
+    $this->drupalPost('admin/structure/types/manage/page/fields/'. $field_name, $edit, t('Save settings'));
+    $this->drupalGet('admin/structure/types/manage/page/fields/'. $field_name .'/field-settings');
+    $this->assertText(t('CCK Pager settings'), t('CCK Pager settings  avaiable with field cardinality major to 1.'));
+
+    $edit = array(
+      'fields['. $field_name .'][type]' => 'text_default',
+    );
+    $this->drupalPost('admin/structure/types/manage/page/display/teaser', $edit, t('Save'));
+    
+    $node = $this->drupalCreateNode(array('type' => 'page'));
+    $nid = $node->nid;
+    $this->drupalGet('node/'. $nid .'/edit');
+    $edit = array();
+	for ($i = 0; $i < $cardinality; $i++) {
+	  $edit[$field_name .'['. LANGUAGE_NONE .']['. $i .'][value]'] = $this->randomString();
+	}
+    $this->drupalPost(NULL, $edit, t('Save'));
+
+    $original = node_load($nid);
+    $entity_info = entity_get_info('node');
+    $limit = 2;
+    foreach ($entity_info['view modes'] as $key => $view_mode) {
+      $field_class = 'field-name-field-'. $name;
+      
+      $clone = clone $original;
+      drupal_static_reset('field_language');
+      _field_info_collate_fields(TRUE);
+      $output = drupal_render(node_view($clone, $key));
+      $this->drupalSetContent($output);
+      
+      $xpath = '//div[contains(@class, :field_class)]/div[contains(@class, "field-items")]/div[contains(@class, "field-item")]';
+      $total = count($this->xpath($xpath, array(':field_class' => $field_class)));
+      $this->assertEqual($total, $cardinality, t('Field without CCK Pager show in view mode @viewmode @total items with cardinality @cardinality.', array('@viewmode' => $view_mode['label'], '@total' => $total, '@cardinality' => $cardinality)));
+    
+      $settings = array();
+      $settings['field[settings][cck_pager]['. $key .'][enabled]'] = TRUE;
+      $settings['field[settings][cck_pager]['. $key .'][limit]'] = $limit;
+      $this->drupalPost('admin/structure/types/manage/page/fields/'. $field_name .'/field-settings', $settings, t('Save field settings'));
+    
+      $clone = clone $original;
+      drupal_static_reset('field_language');
+      _field_info_collate_fields(TRUE);
+      $output = drupal_render(node_view($clone, $key));
+      $this->drupalSetContent($output);
+      
+      $xpath = '//div[contains(@class, :field_class)]/div[contains(@class, "field-items")]/div[contains(@class, "field-item")]';
+      $total = count($this->xpath($xpath, array(':field_class' => $field_class)));
+      $this->assertEqual($total, $limit, t('Field with CCK Pager show in view mode @viewmode @total items with limit @limit.', array('@viewmode' => $view_mode['label'], '@total' => $total, '@limit' => $limit)));
+  
+      $xpath = '//div[@class="cck_pager"]//ul[@class="pager"]';
+      $total = count($this->xpath($xpath));
+      $this->assertTrue(count($this->xpath($xpath)), t('Pager is visible in view mode @viewmode.', array('@viewmode' => $view_mode['label'])));
+    }
+
+    $settings = array();
+    $settings['field[settings][cck_pager][full][query_param]'] = 'test_query';
+    $settings['field[settings][cck_pager][full][maxpagerpages]'] = 2;
+    $this->drupalPost('admin/structure/types/manage/page/fields/'. $field_name .'/field-settings', $settings, t('Save field settings'));
+    
+    $this->drupalGet('node/'. $nid);
+    $xpath = '//div[@class="cck_pager"]//ul[@class="pager"]/li/a[contains(@href, :href)]';
+    $this->assertTrue(count($this->xpath($xpath, array(':href' => 'test_query'))), t('Found valid query param.'));
+    
+    $xpath = '//div[@class="cck_pager"]//ul[@class="pager"]/li[3]';
+    $this->assertTrue(current($this->xpath($xpath)) == '…', t('Found valid ellipsis.'));
+  }
+}

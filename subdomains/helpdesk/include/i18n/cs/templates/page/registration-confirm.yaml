@@ -1,0 +1,4 @@
+---
+notes: Tyto šablony definují stránky zobrazené klientům po ukončení registračního formuláře. V šabloně by mělo být uvedeno, že systém jim zašle e-mail s odkazem pro potvrzení a co je další krok v procesu registrace.
+name: Registrace účtu
+body: '<div> <strong> Děkujeme za registraci účtu. </strong> <br /> <br /> Právě jsme vám poslali e-mail na adresu, kterou jste zadali. Prosím, klikněte na odkaz v e-mailu pro potvrzení vašeho účtu a získání přístupu k vašim tiketům. </div>'

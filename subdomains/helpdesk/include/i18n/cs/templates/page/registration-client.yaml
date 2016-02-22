@@ -1,0 +1,4 @@
+---
+notes: 'Tato šablona definuje e-mail zaslán klientovi v případě, že jeho účet byl vytvořen v Klientském portálu nebo pomocí agenta jeho jménem. Tento e-mail slouží jako ověření e-mailové adresy. Prosím, použijte %{link} někde v těle.'
+name: 'Vítejte v %{company.name}'
+body: '<h3><strong>Ahoj %{recipient.name.first},</strong></h3> <div>  Vytvořili jsme pro vás účet na našem helpdesk na %{url}. <br /> <br /> Prosím následujte níže uvedený odkaz pro potvrzení vašeho účtu a získání přístupu k vašim lístkům. <br /> <br /> <a href="%{link}">%{link}</a><br /> <br /> <em style="font-size: small">Váš zpřátelený Zákaznický Systém Podpory <br /> %{company.name}</em> </div>'

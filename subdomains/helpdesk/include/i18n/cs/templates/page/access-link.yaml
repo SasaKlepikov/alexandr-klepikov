@@ -1,0 +1,4 @@
+---
+notes: Tato šablona definuje oznámení pro klienty, kterým byl přístup poslán na jejich e-mail. Číslo tiketu a e-mailová adresa spustí přístupový odkaz.
+name: 'Odkaz na číslo tiketu [#%{ticket.number}]'
+body: '<h3><strong>Dobrý den %{recipient.name.first},</strong></h3> <div> V helpdesku %{url} byl za Vaši osobu odeslán požadavek na přístup k tiketu #%{ticket.number}.<br /> <br /> Pro kontrolu tiketu č. #%{ticket.number}, klikněte na následující odkaz.<br /> <br /> <a href="%{recipient.ticket_link}">%{recipient.ticket_link}</a><br /> <br /> Pokud jste si jej <strong>nevyžádali</strong> , smažte tento email a považujte jej za bezpředmětný. Váš účet zůstává zabezpečený a nikomu nebyly předány přístupové údaje k tiketu. Někdo mohl náhodně zadat Vaši emailovou adresu.<br /> <br /> --<br /> %{company.name} </div>'

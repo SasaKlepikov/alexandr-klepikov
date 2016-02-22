@@ -1,0 +1,506 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Crumina Page Slider\n"
+"POT-Creation-Date: 2014-03-19 13:32-0000\n"
+"PO-Revision-Date: 2014-03-19 13:32-0000\n"
+"Last-Translator: Sunny Johal - WordPress Gorilla <support@wordpressgorilla."
+"com>\n"
+"Language-Team: Sunny Johal - WordPress Gorilla <support@wordpressgorilla."
+"com>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.4\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: includes/admin/class-cps-ajax.php:309 includes/admin/class-cps-ajax.php:363
+#: includes/frontend/class-cps-posttype.php:200
+#: includes/frontend/class-cps-posttype.php:321
+#: views/admin-page/dialog-deleted.php:18
+#: views/admin-page/dialog-updated.php:18
+msgid "Page Slider"
+msgstr ""
+
+#: includes/admin/class-cps-walker-slider-checklist.php:185
+#, php-format
+msgctxt "nav menu front page title"
+msgid "Home: %s"
+msgstr ""
+
+#: includes/admin/class-cps-walker-slider-edit.php:174
+#, php-format
+msgid "%s (Invalid)"
+msgstr ""
+
+#: includes/admin/class-cps-walker-slider-edit.php:190
+#, php-format
+msgid "%s (Pending)"
+msgstr ""
+
+#: includes/admin/class-cps-walker-slider-edit.php:201
+#: includes/admin/class-cps-walker-slider-edit.php:202
+msgid "Edit Slider Item"
+msgstr ""
+
+#: includes/admin/class-cps-walker-slider-edit.php:242
+msgid "Post Offset:"
+msgstr ""
+
+#: includes/admin/class-cps-walker-slider-edit.php:248
+msgid "Post Order:"
+msgstr ""
+
+#: includes/admin/class-cps-walker-slider-edit.php:250
+msgid "ASC"
+msgstr ""
+
+#: includes/admin/class-cps-walker-slider-edit.php:251
+msgid "DESC"
+msgstr ""
+
+#: includes/admin/class-cps-walker-slider-edit.php:257
+msgid "Number of items:"
+msgstr ""
+
+#: includes/admin/class-cps-walker-slider-edit.php:259
+msgid "1"
+msgstr ""
+
+#: includes/admin/class-cps-walker-slider-edit.php:260
+msgid "2"
+msgstr ""
+
+#: includes/admin/class-cps-walker-slider-edit.php:261
+msgid "3"
+msgstr ""
+
+#: includes/admin/class-cps-walker-slider-edit.php:262
+msgid "4"
+msgstr ""
+
+#: includes/admin/class-cps-walker-slider-edit.php:263
+msgid "5"
+msgstr ""
+
+#: includes/admin/class-cps-walker-slider-edit.php:264
+msgid "6"
+msgstr ""
+
+#: includes/admin/class-cps-walker-slider-edit.php:265
+msgid "7"
+msgstr ""
+
+#: includes/admin/class-cps-walker-slider-edit.php:266
+msgid "8"
+msgstr ""
+
+#: includes/admin/class-cps-walker-slider-edit.php:267
+msgid "9"
+msgstr ""
+
+#: includes/admin/class-cps-walker-slider-edit.php:268
+msgid "10"
+msgstr ""
+
+#: includes/admin/class-cps-walker-slider-edit.php:278
+#, php-format
+msgid "Original: %s"
+msgstr ""
+
+#: includes/admin/class-cps-walker-slider-edit.php:292
+msgid "Remove"
+msgstr ""
+
+#: includes/admin/class-cps-walker-slider-edit.php:293
+msgid "Cancel"
+msgstr ""
+
+#: includes/admin/class-crumina-page-slider-admin.php:231
+msgid ""
+"This page is asking you to confirm that you want to leave - data you have "
+"entered may not be saved."
+msgstr ""
+
+#: includes/admin/class-crumina-page-slider-admin.php:232
+msgid ""
+"Warning! You are about to permanently delete all page sliders. 'Cancel' to "
+"stop, 'OK' to delete."
+msgstr ""
+
+#: includes/admin/class-crumina-page-slider-admin.php:233
+msgid ""
+"You are about to permanently delete this page slider. 'Cancel' to stop, 'OK' "
+"to delete."
+msgstr ""
+
+#: includes/admin/class-crumina-page-slider-admin.php:234
+msgid "Leave Page"
+msgstr ""
+
+#: includes/admin/class-crumina-page-slider-admin.php:235
+msgid "Stay on Page"
+msgstr ""
+
+#: includes/admin/class-crumina-page-slider-admin.php:236
+msgid "No Results Found."
+msgstr ""
+
+#: includes/admin/class-crumina-page-slider-admin.php:237
+msgid "No Sliders"
+msgstr ""
+
+#: includes/admin/class-crumina-page-slider-admin.php:290
+#: includes/admin/class-crumina-page-slider-admin.php:291
+msgid "Page Sliders"
+msgstr ""
+
+#: includes/admin/class-crumina-page-slider-admin.php:304
+#: includes/admin/class-crumina-page-slider-admin.php:305
+#: views/admin-page/tabs.php:5
+msgid "Edit Page Sliders"
+msgstr ""
+
+#: includes/admin/class-crumina-page-slider-admin.php:312
+#: includes/admin/class-crumina-page-slider-admin.php:313
+msgid "Add New"
+msgstr ""
+
+#: includes/admin/class-crumina-page-slider-admin.php:320
+#: includes/admin/class-crumina-page-slider-admin.php:321
+#: views/admin-page/tabs.php:8
+msgid "Manage Page Sliders"
+msgstr ""
+
+#: includes/admin/class-crumina-page-slider-admin.php:474
+#: includes/admin/class-crumina-page-slider-admin.php:778
+msgid "No items."
+msgstr ""
+
+#: includes/admin/class-crumina-page-slider-admin.php:491
+#: includes/admin/class-crumina-page-slider-admin.php:803
+msgid "&laquo;"
+msgstr ""
+
+#: includes/admin/class-crumina-page-slider-admin.php:492
+#: includes/admin/class-crumina-page-slider-admin.php:804
+msgid "&raquo;"
+msgstr ""
+
+#: includes/admin/class-crumina-page-slider-admin.php:528
+msgid "Most Recent"
+msgstr ""
+
+#: includes/admin/class-crumina-page-slider-admin.php:529
+#: includes/admin/class-crumina-page-slider-admin.php:838
+msgid "View All"
+msgstr ""
+
+#: includes/admin/class-crumina-page-slider-admin.php:530
+#: includes/admin/class-crumina-page-slider-admin.php:576
+#: includes/admin/class-crumina-page-slider-admin.php:578
+#: includes/admin/class-crumina-page-slider-admin.php:839
+#: includes/admin/class-crumina-page-slider-admin.php:888
+#: includes/admin/class-crumina-page-slider-admin.php:890
+msgid "Search"
+msgstr ""
+
+#: includes/admin/class-crumina-page-slider-admin.php:543
+#: includes/admin/class-crumina-page-slider-admin.php:550
+#: includes/admin/class-crumina-page-slider-admin.php:610
+#: includes/admin/class-crumina-page-slider-admin.php:617
+#, php-format
+msgid "%s Archive"
+msgstr ""
+
+#: includes/admin/class-crumina-page-slider-admin.php:590
+#: includes/admin/class-crumina-page-slider-admin.php:902
+msgid "No results found."
+msgstr ""
+
+#: includes/admin/class-crumina-page-slider-admin.php:640
+msgctxt "nav menu home label"
+msgid "Home"
+msgstr ""
+
+#: includes/admin/class-crumina-page-slider-admin.php:676
+#: includes/admin/class-crumina-page-slider-admin.php:917
+msgid "Select All"
+msgstr ""
+
+#: includes/admin/class-crumina-page-slider-admin.php:680
+#: includes/admin/class-crumina-page-slider-admin.php:921
+msgid "Add to Slider"
+msgstr ""
+
+#: includes/admin/class-crumina-page-slider-admin.php:837
+msgid "Most Used"
+msgstr ""
+
+#: includes/admin/class-crumina-page-slider-admin.php:1081
+msgid "Manage Sliders"
+msgstr ""
+
+#: includes/admin/class-crumina-page-slider-admin.php:1140
+msgid "Overview"
+msgstr ""
+
+#: includes/admin/class-crumina-page-slider-admin.php:1152
+msgid "For more information:"
+msgstr ""
+
+#: includes/admin/class-crumina-page-slider-admin.php:1153
+msgid "E-mail Support"
+msgstr ""
+
+#: includes/admin/class-crumina-page-slider-admin.php:1154
+msgid "Support Forums"
+msgstr ""
+
+#: includes/admin/class-crumina-page-slider-admin.php:1174
+msgid ""
+"This screen is used for managing your page sliders. Page sliders are used to "
+"display your post/page/site content in an easy to view slider."
+msgstr ""
+
+#: includes/admin/class-crumina-page-slider-admin.php:1175
+msgid "From this screen you can:"
+msgstr ""
+
+#: includes/admin/class-crumina-page-slider-admin.php:1176
+msgid "Create, edit, and delete page sliders"
+msgstr ""
+
+#: includes/admin/class-crumina-page-slider-admin.php:1177
+msgid "Choose a template for each page slider."
+msgstr ""
+
+#: includes/admin/class-crumina-page-slider-admin.php:1178
+msgid "Add, organize, and modify pages/posts etc that belong to a page slider"
+msgstr ""
+
+#: includes/frontend/class-cps-frontend.php:296
+#: includes/frontend/class-cps-posttype.php:121
+msgid "Crumina Page Slider"
+msgstr ""
+
+#: includes/frontend/class-cps-frontend.php:536
+msgid "Template file could not be located. Please select another template."
+msgstr ""
+
+#: includes/frontend/class-cps-frontend.php:540
+msgid "Please select a template for this page slider."
+msgstr ""
+
+#: includes/frontend/class-cps-frontend.php:547
+msgid "No page sliders have been found with that id."
+msgstr ""
+
+#: includes/frontend/class-cps-posttype.php:120
+msgid "Crumina Page Sliders"
+msgstr ""
+
+#: includes/frontend/class-cps-templates.php:133
+msgid "Automatic Mode"
+msgstr ""
+
+#: includes/frontend/class-cps-templates.php:134
+msgid "Please check this box to enable automatic mode."
+msgstr ""
+
+#: includes/frontend/class-cps-templates.php:139
+msgid "Category and Scrollbar Color"
+msgstr ""
+
+#: includes/frontend/class-cps-templates.php:140
+msgid "Color Picker Field."
+msgstr ""
+
+#: includes/frontend/class-cps-templates.php:145
+msgid "Element Background Color"
+msgstr ""
+
+#: includes/frontend/class-cps-templates.php:146
+msgid "This option determines the hover box background color for even slides."
+msgstr ""
+
+#: includes/frontend/class-cps-templates.php:151
+msgid "Odd Element Background Color"
+msgstr ""
+
+#: includes/frontend/class-cps-templates.php:152
+msgid "This option determines the hover box background color for odd slides."
+msgstr ""
+
+#: includes/frontend/class-cps-templates.php:157
+msgid "Opacity"
+msgstr ""
+
+#: includes/frontend/class-cps-templates.php:158
+msgid "This option determines hover box opacity for all slides."
+msgstr ""
+
+#: includes/frontend/class-cps-templates.php:353
+msgid "Hex Value"
+msgstr ""
+
+#: includes/frontend/class-cps-templates.php:368
+msgid "Reset"
+msgstr ""
+
+#: includes/frontend/class-cps-templates.php:435
+msgid "Template"
+msgstr ""
+
+#: includes/frontend/class-cps-templates.php:442
+msgid "Please select a template to use"
+msgstr ""
+
+#: views/admin-page/create-screen.php:67 views/admin-page/edit-screen.php:78
+#: views/admin-page/manage-screen.php:69
+msgid "Page Slider Name"
+msgstr ""
+
+#: views/admin-page/create-screen.php:68 views/admin-page/edit-screen.php:79
+msgid "Enter page slider name here"
+msgstr ""
+
+#: views/admin-page/create-screen.php:80
+#: views/admin-page/create-screen.php:135
+msgid "Create Page Slider"
+msgstr ""
+
+#: views/admin-page/create-screen.php:98
+msgid "Give your page slider a name above, then click Create Page Slider."
+msgstr ""
+
+#: views/admin-page/create-screen.php:113 views/admin-page/edit-screen.php:142
+msgid "Delete Page Slider"
+msgstr ""
+
+#: views/admin-page/dialog-deleted.php:20
+#, php-format
+msgid "%1$s has been deleted."
+msgstr ""
+
+#: views/admin-page/dialog-updated.php:21
+#, php-format
+msgid "%1$s has been updated."
+msgstr ""
+
+#: views/admin-page/edit-screen.php:85 views/admin-page/edit-screen.php:148
+msgid "Save Page Slider"
+msgstr ""
+
+#: views/admin-page/edit-screen.php:104
+msgid "Page Slider Items"
+msgstr ""
+
+#: views/admin-page/edit-screen.php:107
+msgid ""
+"Drag each item into the order you prefer. Click the arrow on the right of "
+"the item to reveal additional configuration options."
+msgstr ""
+
+#: views/admin-page/edit-screen.php:112
+msgid "Add items to this page slider from the column on the left."
+msgstr ""
+
+#: views/admin-page/manage-control-form.php:21
+msgid "Select a page slider to edit:"
+msgstr ""
+
+#: views/admin-page/manage-control-form.php:26
+msgid "Select"
+msgstr ""
+
+#: views/admin-page/manage-control-form.php:29
+msgid "create a new page slider"
+msgstr ""
+
+#: views/admin-page/manage-control-form.php:32
+msgid "Create a new Page Slider."
+msgstr ""
+
+#: views/admin-page/manage-screen.php:33 views/admin-page/manage-screen.php:55
+msgid "Create a new page slider:"
+msgstr ""
+
+#: views/admin-page/manage-screen.php:36 views/admin-page/manage-screen.php:58
+msgid "Create a New Page Slider"
+msgstr ""
+
+#: views/admin-page/manage-screen.php:54
+msgid "Manage your page sliders here or:"
+msgstr ""
+
+#: views/admin-page/manage-screen.php:70
+msgid "Slider Shortcode"
+msgstr ""
+
+#: views/admin-page/manage-screen.php:97
+msgid "Edit"
+msgstr ""
+
+#: views/admin-page/manage-screen.php:97
+msgid "Delete"
+msgstr ""
+
+#: views/admin-page/manage-screen.php:116
+msgid "Delete All Page Sliders"
+msgstr ""
+
+#: views/admin-page/page-slider-options.php:41
+msgid "Page Slider Properties"
+msgstr ""
+
+#: views/admin-page/page-slider-options.php:43
+#: views/admin-page/page-slider-template-options.php:22
+msgid "Edit the options below to change the appearence of this page slider."
+msgstr ""
+
+#: views/admin-page/page-slider-options.php:46
+msgid "Visibility Options"
+msgstr ""
+
+#: views/admin-page/page-slider-options.php:51
+msgid "Show Title"
+msgstr ""
+
+#: views/admin-page/page-slider-options.php:56
+msgid "Show Icons"
+msgstr ""
+
+#: views/admin-page/page-slider-options.php:61
+msgid "Show Categories"
+msgstr ""
+
+#: views/admin-page/page-slider-options.php:66
+msgid "Display Link to Page"
+msgstr ""
+
+#: views/admin-page/page-slider-options.php:72
+msgid "Show Description"
+msgstr ""
+
+#: views/admin-page/page-slider-options.php:77
+msgid "Description Limit (Number of words)"
+msgstr ""
+
+#: views/admin-page/page-slider-template-options.php:20
+msgid "Page Slider Template Options"
+msgstr ""
+
+#: views/admin-page/page-start.php:32
+msgid "Cheatin&#8217; uh?"
+msgstr ""
+
+#: views/admin-page/tabs.php:13
+msgid "Advanced"
+msgstr ""

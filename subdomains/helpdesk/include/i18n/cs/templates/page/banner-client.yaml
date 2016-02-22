@@ -1,0 +1,4 @@
+---
+notes: Toto sestavuje záhlaví na stránce Přihlášení klienta. Může být užitečné k informování Vašich klientů o Vašich politikách přihlašování a registrace.
+name: 'Přihlaste se k %{company.name}'
+body: Pro naše lepší služby, doporučujeme našim klientů zaregistrovat si účet.

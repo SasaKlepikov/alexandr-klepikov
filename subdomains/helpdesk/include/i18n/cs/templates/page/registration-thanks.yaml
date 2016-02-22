@@ -1,0 +1,4 @@
+---
+notes: Tato šablona zobrazuje informace po úspešném potvrzení registrace. Může např. informovat uživatele o dokončení registrace a že klient již může zadávat tikety nebo přistupovat k existujícím požadavkům.
+name: Účet byl potvrzen!
+body: '<div> <strong>Děkujeme Vám za registraci.</strong><br /> <br /> Potvrzení Vašeho e-mailu proběhlo úspěšně a aktivace účtu byla dokončena. Můžete pokračovat otevřením nového požadavku nebo aktualizovat již existující.<br /> <br /> <em>Vaše zákaznická podpora</em><br /> %{company.name} </div>'

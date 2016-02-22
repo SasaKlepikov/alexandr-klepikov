@@ -1,0 +1,424 @@
+/* Header styles
+**********************************************************/
+
+
+/* Buddypress
+**********************************************************/
+@media only screen and (max-width: 480px) {
+	#buddypress div.dir-search input[type="text"] {
+		width: 100% !important;
+	}
+	#buddypress div.dir-search {
+		text-align: left !important;
+	}
+}
+
+@media only screen and (max-width: 360px) {
+	#buddypress #item-body #subnav.item-list-tabs #activity-filter-select {
+		float: left !important;
+	}
+}
+
+
+
+@media screen and (max-width: 830px) {
+
+    .og-expander h3 { font-size: 32px; }
+    .og-expander p { font-size: 13px; }
+    .og-expander a { font-size: 12px; }
+
+}
+
+@media screen and (max-width: 650px) {
+
+    .og-fullimg { display: none; }
+    .og-details { float: none; width: 100%; }
+
+    .masonry-item .format-gallery {
+        max-width: 630px;
+    }
+
+}
+
+
+/* Site structure
+**********************************************************/
+@media (max-width: 1024px) {
+
+    .menu-additional-navigation { display: none; }
+
+
+	.product.large-3{
+		width: 50% !important;
+	}
+	.product.large-4{
+		width: 33% !important;
+	}
+
+	.pricing-table > div {
+		width: 20%!important;
+		margin-bottom: 25px!important;
+	}
+
+	.pricing-column.highlight {
+		margin-top: 0px!important;
+	}
+
+	.pricing-column h3 {
+		font-size: 20px!important;
+	}
+
+	.pricing-column.highlight h3 {
+		padding: 5px 0px!important;
+	}
+
+	body .clients.no-carousel > div {
+		width: 24.2%!important;
+		margin-right: 1%!important;
+        min-height:150px;
+	}
+
+	body .clients.no-carousel.six-cols > div {
+		width:15.8% !important;
+		margin-right: 1%!important;
+	}
+
+	body .clients.no-carousel.five-cols  > div {
+		width: 19.2%!important;
+		margin-right: 1%!important;
+	}
+
+	body .clients.no-carousel > div:nth-child(4n+4){
+		margin-right: 0px!important;
+	}
+
+	body .clients.carousel > div {
+		margin: 0px 5px!important;
+	}
+    .masonry-item .format-gallery {
+        max-width: 900px;
+    }
+
+
+}
+
+@media (max-width: 1120px){
+    .follow-widget a { width: 49%; }
+    .title-size-medium .title {letter-spacing: 3px}
+    #main-content {padding-right: 15px}
+
+    .og-fullimg { width: 30%}
+    .og-details { width: 70%}
+
+    .og-details h3 { font-size: 40px; }
+
+}
+
+@media (max-width: 768px) {
+
+    .follow-widget a { width: 30%; }
+    .title-size-medium .title {letter-spacing: 3px}
+
+    .header-style-4 #header { position: static !important;}
+    .header-style-4 #top-header { background: #000; }
+    .header-style-4 #header .header-inside { padding-bottom: 15px; }
+
+    #stunning-header {padding-top: 0 !important;}
+
+    .logo { text-align: center; width: 100%; }
+    .main-nav {width: 100%; margin-bottom: 15px}
+    .menu-additional-navigation { display: none; }
+    .menu-primary-navigation { width: 100%; background: #171717 }
+
+    .menu-primary-navigation > li.showhide {display: block; border-bottom: none}
+    .menu-primary-navigation > li { display: none; width: 100%; border-bottom: 1px solid #454545;}
+    .menu-primary-navigation > li:hover > a { background: #2F2F2F; }
+    .menu-primary-navigation > li > a {padding:15px; width: 100%;}
+    .menu-primary-navigation .indicator { top: 15px;}
+    .menu-primary-navigation > li.active > a:before, .menu-primary-navigation > li:hover > a:before {display: none}
+    .menu-primary-navigation ul.dropdown, .menu-primary-navigation ul.dropdown li ul.dropdown { position: relative;}
+
+
+    .title-size-medium .title {letter-spacing: 1px}
+
+    body .clients.no-carousel > div {
+        width: 24.2%!important;
+        margin-right: 1%!important;
+        min-height:100px;
+    }
+
+	#stunning-header {
+		text-align: center;
+	}
+	#stunning-header .header-title {
+		font-size: 2em;
+		float: none !important;
+	}
+	#stunning-header .breadcrumbs{
+		float: none !important;
+	}
+
+	.vcpb-vz-jquery {
+		min-height: auto !important;
+		background-position: center !important;
+	}
+
+    .format-quote blockquote { padding: 3.5rem 1rem 2.4rem;}
+
+    .gridlist-toggle {clear: left}
+
+    .title-block.stroke .title:after {
+        right: -30px;
+    }
+    .title-block.stroke .title:before {
+        left: -30px;
+    }
+    .title-block.stroke .title:before, .title-block.stroke .title:after {
+        width: 20px;
+    }
+
+	.entry-content>.row, .wpb_column {margin-bottom: 3em !important;}
+	.entry-content>.row:last-child, .wpb_column:last-child {margin-bottom: 0 !important;}
+
+    .small-block-grid-2 > li {width: 49.9% !important;}
+
+
+    /*Responsive font-size*/
+
+    h3 {font-size: 20px;}
+    h5 { font-size: 13px;}
+
+
+    #footer .sidebar {width: 50%}
+    #footer .sidebar:nth-child(odd){
+        clear: left;
+    }
+
+	#footer #linkTop {
+		right:10px;
+        bottom: 10px;
+	}
+	.crumina_slider.atlantis .item-category {
+		display: none;
+	}
+
+	#left-sidebar, #right-sidebar, #main-content, .blog-section {
+		width: 100% !important;
+		float: none  !important;
+	}
+
+    .pricing-table > div {
+        width: 50%!important;
+        margin-bottom: 25px!important;
+    }
+
+    .client-list.three-cols > div {
+        width: 50%;
+    }
+    .masonry-item .format-gallery {
+        max-width: 710px;
+    }
+
+
+    .featured-post .text-desc .item-title, .featured-post .links .item-title, .single-thumbnail .text-desc .item-title,
+    .single-thumbnail .links .item-title { padding-bottom: 10px; margin-bottom: 10px;}
+    .featured-post .text-desc .entry-meta, .featured-post .links .entry-meta,
+    .single-thumbnail .text-desc .entry-meta, .single-thumbnail .links .entry-meta { font-size: 12px; margin-bottom: 5px;}
+    .featured-post .read-more-button, .single-thumbnail .read-more-button { margin-top: 10px; }
+    .single-post .entry-meta {padding: 5px 0;}
+
+    #main-content .folio-main {padding-bottom: 29px;margin-bottom: 30px;}
+
+    #colophon { margin-bottom: 10px; text-align: center;}
+    .footer-links {float: none; text-align: center}
+    .footer-links .inline-list > li {float: none; display: inline-block; }
+
+}
+@media (max-width: 640px){
+    #social-share .share-post { display: none}
+
+    .masonry-item .format-gallery {
+        max-width: 600px;
+    }
+
+    .project-description {
+        margin-top: 20px;
+    }
+    .og-details h3 { font-size: 20px; }
+    .og-expander p {overflow: hidden; max-height: 250px}
+    .og-fullimg { width: 100%}
+    .og-details { width: 100%}
+}
+@media (max-width: 480px){
+
+    .menu-primary-navigation > li > .megamenu .columns {width: 100%}
+    .menu-primary-navigation li .megamenu {  padding: 0; margin: 0; width: auto !important; position: static;}
+	.menu-primary-navigation > li > .megamenu .columns {margin: 5px 0;}
+
+    .title-size-medium .title {letter-spacing: 0}
+
+    .testimonial-item .ovh {
+        clear: both;
+    }
+
+
+    .masonry-item .format-gallery {
+        max-width: 430px;
+    }
+
+    /*Responsive font-size*/
+
+    h3 {font-size: 18px;}
+    h5 { font-size: 12px;}
+
+    #social-share {float: none;clear: both;}
+
+    .follow-widget a { width: 49%; }
+
+    #comments .avatar {display: none;}
+    article.post, body.search-results #main-content article { padding-bottom: 24px; margin-bottom: 30px;}
+
+    .grid > div {
+        width: 100% !important;
+        float: none;
+    }
+
+    .woocommerce div.product form.cart .single_add_to_cart_button, .woocommerce #content div.product form.cart .single_add_to_cart_button, .woocommerce-page div.product form.cart .single_add_to_cart_button, .woocommerce-page #content div.product form.cart .single_add_to_cart_button {
+        margin-left: 0;}
+
+    .client-list.three-cols > div {
+        width: 100%;
+    }
+    .small-block-grid-2 > li {width: 99.99% !important;}
+    .large-block-grid-2 > li {width: 99.99%;}
+
+	.row .vc_call_to_action {
+		text-align: center;
+	}
+	.vc_call_to_action.vc_cta_btn_pos_right .vc_cta_btn {
+		float: none !important;
+	}
+	.product.large-3, .product.large-4{
+		width: 100% !important;
+	}
+	.pricing-table > div {
+		width: 100%!important;
+		margin-bottom: 25px!important;
+	}
+
+    .entry-thumbnail .overlay {left: 0; right: 0; top: 0; bottom: 0;}
+    .entry-thumb .links a, .entry-thumbnail .links a { height: 50px; line-height: 50px; width: 50px;}
+    .featured-post .text-desc .item-title, .featured-post .links .item-title, .single-thumbnail .text-desc .item-title, .single-thumbnail .links .item-title {
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
+    .featured-post .text-desc .entry-meta , .featured-post .entry-content {display: none}
+
+    /*Crumina Slider*/
+
+    .crumina_slider .icon {height: 31px; margin-bottom: 0;}
+
+
+    #footer .sidebar {width: 100%}
+
+    .follow-widget a {
+        min-width: 97px;
+        float:left;
+    }
+
+	.woocommerce #content div.product div.images, .woocommerce div.product div.images, .woocommerce-page #content div.product div.images, .woocommerce-page div.product div.images, .woocommerce #content div.product div.summary, .woocommerce div.product div.summary, .woocommerce-page #content div.product div.summary, .woocommerce-page div.product div.summary{
+		width: 100%;
+		float: none;
+	}
+}
+
+@media (max-width: 600px) {
+	.crumina_slider.embrace .item-desc, .crumina_slider.embrace .text-desc h6, .crumina_slider.embrace .read-more-button,
+	.crumina_slider.embrace .item-desc, .crumina_slider.embrace .item-meta, .crumina_slider.embrace .text-desc h6:after,
+	.crumina_slider.embrace .text-desc h3:after {
+		display: none;
+	}
+	.crumina_slider.embrace {margin-bottom: 0;}
+}
+
+@media (min-width: 768px) and (max-width: 800px) {
+	.crumina_slider.embrace .icon {
+		height: 30px;
+		margin-bottom: 10px;
+		margin-top: 30px;
+		}
+	.crumina_slider.embrace .item-desc {padding-top: 0;}
+}
+
+/*
+Make the Facebook Like box responsive (fluid width)
+https://developers.facebook.com/docs/reference/plugins/like-box/
+*/
+
+/* This element holds injected scripts inside iframes that in some cases may stretch layouts. So, we're just hiding it. */
+#fb-root {
+    display: none;
+}
+
+/* To fill the container and nothing else */
+.fb_iframe_widget, .fb_iframe_widget span, .fb_iframe_widget span iframe[style] {
+    width: 100% !important;
+}
+
+
+@media screen and (max-width: 650px) {
+
+    .masonry-item .format-gallery {
+        max-width: 630px;
+    }
+
+}
+@media screen and (max-width: 590px) {
+
+    .masonry-item .format-gallery {
+        max-width: 540px;
+    }
+
+}
+
+@media (max-width: 360px){
+    .masonry-item .format-gallery {
+        max-width: 330px;
+    }
+}
+
+
+@media (max-width: 360px){
+    .masonry-item .format-gallery {
+        max-width: 290px;
+    }
+}
+
+/*Crumina Gallery Fixes*/
+
+@media only screen and (width:480px) {
+	.slick-slide img {width: 450px;}
+
+	.entry-thumb .links a, .entry-thumbnail .links a {
+		position: relative;
+		right: 40px;
+	}
+}
+
+@media only screen and (width:600px) {
+	.slick-slide img {width: 570px;}
+	.slick-next{right: 60px !important;}
+	.entry-thumb .links a, .entry-thumbnail .links a {
+		position: relative;
+		right: 30px;
+	}
+}
+
+@media only screen and (width:800px) {
+	.slick-slide img {width: 770px;}
+	.slick-next{right: 130px !important;}
+	.entry-thumb .links a, .entry-thumbnail .links a {
+		position: relative;
+		right: 65px;
+	}
+}

@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @file
+ * User Content Type install/uninstall routines.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function user_content_type_uninstall() {
+  drupal_load('module', 'user_content_type');
+  $contenttypes = node_type_get_names();
+
+  // Content type exists, delete it.
+  if (isset($contenttypes['user_node'])) {
+    _user_content_type_delete_all();
+  }
+
+  // Unset all user_content_type-variables.
+  variable_del('user_content_type_title');
+  variable_del('user_content_type_title_field_1');
+  variable_del('user_content_type_title_field_2');
+  variable_del('user_content_type_title_field_3');
+  variable_del('user_content_type_body');
+  variable_del('user_content_type_disable_hooks');
+}

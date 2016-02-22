@@ -1,0 +1,838 @@
+/**
+ * Admin Page Stylesheet
+ * 
+ * WordPress Administration Custom Page Slider Settings 
+ * Interface CSS Styles.
+ *
+ * @package   Crumina_Page_Slider
+ * @author    Sunny Johal <support@titaniumthemes.com>
+ * @license   GPL-2.0+
+ * @copyright Copyright (c) 2014, Crumina Team
+ * @version   1.0
+ * 
+ */
+
+/**
+ * Global Styles
+ */
+.clear {
+    clear: both;
+}
+
+.howto {
+    display: block;
+    font-style: italic;
+}
+.wp-admin select {
+}
+
+textarea, input, select {
+    font-size: 14px;
+}
+
+/**
+ * Manage Page Slider Page
+ * ==================================
+ *
+ * The following styles are used for the Manage
+ * Page Sliders Screen.
+ *
+ * @since 1.0
+ * @version 1.0
+ * 
+ */
+#slider-replacements-wrap .widefat {
+    min-width: 550px;
+    width: 60%;
+}
+.fixed .column-sidebars {
+    width: 35%;
+}
+a.slider-edit-link {
+
+}
+
+a.slider-delete-link {
+    color: #BC0B0B;
+    text-decoration: none;
+}
+
+a.slider-delete-link:hover {
+    color: red;
+}
+
+#slider-management .slider-edit {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+
+#slider-management .spinner {
+    float:left;
+}
+
+#page-sliders-table.widefat {
+    margin-top: 20px;
+    margin-bottom: 7px;
+    max-width: 960px;
+}
+
+#page-sliders-table.widefat input[type="text"] {
+    background: #f5f5f5;
+    box-shadow: none;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+#page-sliders-table.widefat input[type="text"]:focus {
+    box-shadow: none;
+    border-color: #DDDDDD;
+}
+
+tr.deleting {
+    background: #FF6666;
+}
+
+tr.success {
+    background: #E0FFE1;
+}
+
+td.default-widget-areas {
+    vertical-align: middle;
+    vertical-align: -webkit-baseline-middle;
+    line-height: 1.4;
+}
+
+.no-sliders label,
+.slider-dialog label {
+    display: inline-block;
+    margin-top: 4px;
+    margin-right: 10px;
+}
+
+.slider-dialog .new-label {
+    display: none;
+    margin-top: 4px;
+    margin-right: 10px;
+}
+
+#delete_all_sliders {
+    display: inline-block;
+    margin-top: 8px;
+    margin-left: 1px;
+    color: #BC0B0B;
+    text-decoration: none;
+}
+
+#delete_all_sliders:hover {
+    color: red;
+    text-decoration: none;
+}
+
+/**
+ * Create/Edit Slider Page
+ * =====================================
+ *
+ * The following styles are used for the Edit
+ * Page Sliders Screen.
+ *
+ * @since 1.0
+ * @version 1.0
+ * 
+ */
+
+/* Sidebar Edit Container Styles */
+
+#sliders-frame {
+    display: block;
+    margin-top: 23px;
+    margin-left: 300px;
+
+}
+
+#slider-frame ul {
+    margin-left: 0;
+}
+
+#sliders-frame:after {
+    display: block;
+    visibility: hidden;
+    clear: both;
+    height: 0;
+    content: ".";
+}
+
+#slider-management-liquid {
+    float: left;
+    margin-top: 0;
+    min-width: 100%;
+    outline: 0 none;
+}
+
+#wpbody-content #slider-all-pages-column {
+    float: left;
+    clear: both;
+    margin-left: -300px;
+    padding-top: 0;
+    width: 281px;
+}
+
+/* Sidebar Dialog Styles */
+#message {
+    display: none;
+}
+
+.manage-sliders {
+    overflow: hidden;
+    margin-top: 23px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background: #FBFBFB;
+    background-clip: border-box;
+    background-origin: padding-box;
+    -webkit-background-size: auto;
+    background-size: auto;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+.manage-sliders .add-new-menu-action {
+    display: inline-block;
+    margin: 4px 0 0 6px;
+}
+
+.manage-sliders form {
+    margin-bottom: 0;
+}
+
+.manage-sliders select {
+    margin-right: 6px;
+    margin-left: 6px;
+    *height: 111;
+}
+
+/* Sidebar With Metabox Accordion */
+.accordion-container {
+    border: 1px solid #ddd;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+
+.accordion-section {
+    margin: 0;
+}
+
+.accordion-section .categorychecklist {
+    margin: 13px 0;
+}
+
+.metabox-holder-disabled .postbox,
+.metabox-holder-disabled .accordion-section-content  {
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+
+.accordion-container .accordion-section:first-child,
+.accordion-container .accordion-section.first-child {
+}
+
+.accordion-section:last-child {
+
+}
+
+.accordion-section-title {
+    position: relative;
+    margin: 0;
+    padding: 15px 20px;
+    border-right: 1px solid #DFDFDF;
+    border-left: 1px solid #DFDFDF;
+    cursor: pointer;
+    -moz-user-select: none;
+}
+
+.accordion-section-title:after {
+    position: absolute;
+    top: 25px;
+    right: 20px;
+    z-index: 1;
+    width: 0;
+    height: 0;
+    border-width: 6px 6px 0;
+    border-style: solid;
+    border-color: #CCCCCC transparent;
+    content: "";
+}
+
+.control-section .accordion-section-title {
+    padding: 10px 20px;
+}
+
+.control-section .accordion-section-title:after {
+    right: 30px;
+}
+
+#slider-all-pages-column .accordion-section-content {
+    display: none;
+    overflow: hidden;
+    padding: 18px 13px;
+}
+
+#slider-all-pages-column .accordion-section.open .accordion-section-content {
+    display: block;
+    background: none repeat scroll 0 0 #FDFDFD;
+}
+
+#slider-all-pages-column .inside {
+    clear: both;
+    margin: 10px 0 0;
+    font-size: 14px;
+}
+
+#slider-all-pages-column ul.add-menu-item-tabs li {
+   padding: 3px 8px 3px 8px;
+}
+
+ul.posttype-tabs,
+ul.add-menu-item-tabs {
+    margin-left: 0;
+}
+
+/**
+ * Sidebar Header and Sidebar Footer Styles
+ */
+#slider-header, #slider-footer {
+    padding: 0 10px;
+    background: #F5F5F5;
+    line-height: 1.4em;
+}
+
+#slider-header {
+    border-bottom: 1px solid #DFDFDF;
+}
+
+#slider-header .custom-slider-name-label {
+    margin-top: 4px;
+}
+
+#slider-header .custom-slider-name {
+    width: 270px;
+}
+
+#slider-header .major-publishing-actions,
+#slider-footer .major-publishing-actions {
+    clear: both;
+    padding: 3px 0 5px;
+}
+
+#slider-header .major-publishing-actions .publishing-action,
+#slider-footer .major-publishing-actions .publishing-action{
+    float: right;
+    margin: 2px 0 1px;
+    text-align: right;
+    line-height: 23px;
+}
+
+#slider-header .howto span {
+    display: block;
+    float: left;
+    margin-top: 6px;
+    font-style: italic;
+}
+
+#slider-footer {
+}
+
+#slider-footer #delete-slider {
+    margin-top: 8px;
+}
+
+#slider-footer #delete-slider.create-screen {
+    margin-top: 6px;
+    padding-left: 0;
+}
+
+#slider-footer #delete-slider {
+    height: auto;
+    border: none!important;
+    background: none;
+    box-shadow: none;
+    color: #BC0B0B;
+    text-decoration: underline;
+    -webkit-transition-timing-function: ease-in-out;
+    -moz-transition-timing-function: ease-in-out;
+    transition-timing-function: ease-in-out;
+    -webkit-transition-duration: .05s;
+    -moz-transition-duration: .05s;
+    transition-duration: .05s;
+    -webkit-transition-property: border,background,color;
+    -moz-transition-property: border,background,color;
+    transition-property: border,background,color;
+}
+
+#slider-footer #delete-slider:hover,
+#slider-footer .submitdelete:hover {
+    color: red;
+    text-decoration: none;
+}
+
+#slider-footer .submitdelete,
+#slider-footer .submitcancel {
+    border: none!important;
+    color: #BC0B0B;
+    background: none;
+    box-shadow: none;
+    display: block;
+    float: left;
+    margin: 4px 0 0 0;
+    line-height: 15px;
+    text-decoration: underline;
+    -webkit-transition-timing-function: ease-in-out;
+    -moz-transition-timing-function: ease-in-out;
+    transition-timing-function: ease-in-out;
+    -webkit-transition-duration: .05s;
+    -moz-transition-duration: .05s;
+    transition-duration: .05s;
+    -webkit-transition-property: border,background,color;
+    -moz-transition-property: border,background,color;
+    transition-property: border,background,color;
+}
+
+/* Sidebar Right Side Settings Body */
+
+#wpbody .open-label {
+    display: block;
+    float: left;
+}
+
+#post-body {
+    padding: 0 10px 10px;
+    border-width: 1px 0;
+    border-style: solid;
+    border-top-color: #FFFFFF;
+    border-bottom-color: #DFDFDF;
+    background: none repeat scroll 0 0 #FFFFFF;
+    *zoom: 0;
+}
+
+#post-body-content {
+    position: relative;
+    float: none;
+    margin-bottom: 0;
+
+}
+
+#post-body-content:after{
+    display: block;
+    visibility: hidden;
+    clear: both;
+    height: 0;
+    content: ".";
+}
+.crumina-tax-options-wrapper {
+    margin-right: 12px;
+}
+
+.crumina-tax-options-wrapper label {
+    width: 120px;
+    float: left;
+    font-size: 12px;
+    padding-top: 5px;
+}
+
+.crumina-tax-options-wrapper input,
+.crumina-tax-options-wrapper select {
+    float: right;
+    width: 200px;
+}
+
+.crumina-tax-options-wrapper .query-option {
+    margin-bottom: 8px;
+}
+
+.slider-settings {
+    overflow: hidden;
+    margin-top: 2em;
+}
+
+.slider-settings dt {
+    left: 0;
+    clear: both;
+    padding: 3px 0 0;
+}
+
+.slider-settings dd {
+    float: left;
+    margin: 0;
+}
+
+
+/**
+ * The UI Sortables Functionality
+ */
+.sortable-placeholder {
+    margin-top: 11px!important;
+    margin-bottom: 0px;
+    padding: 0;
+    width: 410px;
+    height: 35px;
+}
+
+#slider-to-edit {
+    margin-left: 0px;
+    padding-top: 1px;
+}
+
+#slider-to-edit li {
+    margin-top: 11px;
+    margin-bottom: 11px;
+    min-height: 1px;
+}
+
+#slider-to-edit .menu-item-settings {
+    display: none;
+}
+
+#slider-to-edit li.deleting {
+   
+}
+
+#slider-to-edit li.deleting .menu-item-handle {
+    background: none;
+    background-color: #FF6666;
+}
+
+#slider_description {
+    width: 250px;
+    height: 100px;
+}
+
+#slider-meta ul.outer-border {
+    margin-top: 0;
+    margin-left: 0;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
+dl.menu-item-bar {
+    margin-top: 0;
+}
+
+/**
+ * Edit Screen Options
+ * ==================================
+ *
+ * The following styles are used to style the
+ * options for each crumina page slider.
+ *
+ * @since 1.0
+ * @version 1.0
+ * 
+ */
+.crumina-static-options dd,
+.crumina-static-options dt {
+    padding-bottom: 15px;
+}
+
+.crumina-static-options .crumina-label {
+}
+
+.crumina-static-options .crumina-option-field {
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+
+#cps-description-limit {
+    width: 50px;
+    text-align: center;
+    margin-right: 4px;
+}
+
+#cps-description-limit-container.hidden {
+    display:none;
+}
+
+.crumina-static-options .ui-spinner-button {
+    height: 20px;
+    position: absolute;
+}
+
+.crumina-static-options .ui-spinner-up {
+
+}
+
+.crumina-static-options .ui-spinner-down {
+    margin-top: 15px;
+}
+
+.crumina-static-options .ui-spinner-button:hover {
+    cursor: pointer;
+}
+
+/**
+ * Dynamic Options
+ * ====================== /
+ */
+.crumina-dynamic-template-options .crumina-select,
+.crumina-dynamic-template-options .crumina-text-input,
+.crumina-dynamic-template-options .crumina-textarea  {
+    width: 220px;
+}
+
+.crumina-dynamic-template-options .crumina-textarea {
+    height: 120px;
+}
+
+/* Description Fields */
+.crumina-dynamic-template-options dd {
+    margin-bottom: 15px;
+}
+.crumina-dynamic-template-options dd p.howto {
+    margin-top: 3px;
+}
+
+/* Number Spinner */
+.crumina-dynamic-template-options .crumina-number-spinner {
+    width: 50px;
+    text-align: center;
+    margin-right: 4px; 
+}
+
+.crumina-dynamic-template-options .ui-spinner-button {
+    height: 18px;
+    position: absolute;
+}
+
+.crumina-dynamic-template-options .ui-spinner-up {
+    margin-top:-3px;
+}
+
+.crumina-dynamic-template-options .ui-spinner-down {
+    margin-top: 13px;
+}
+
+.crumina-dynamic-template-options .ui-spinner-button:hover {
+    cursor: pointer;
+}
+
+/* jQuery UI Slider */
+.crumina-dynamic-template-options .ui-slider {
+    position: relative;
+    text-align: left;
+    width: 220px;
+    float: left;
+    margin-bottom: 9px;
+}
+.crumina-dynamic-template-options .crumina-ui-slider-display {
+    float:left;
+    margin-left: 20px;
+    line-height: 1.2;
+    font-weight: bold;
+    font-size: 14px;
+}
+.crumina-dynamic-template-options .crumina-ui-slider-reset {
+    font-size: 11px;
+    text-decoration: none;
+}
+
+.crumina-dynamic-template-options .ui-slider .ui-slider-handle {
+    position: absolute;
+    z-index: 2;
+    width: 1.2em;
+    height: 1.2em;
+    cursor: pointer;
+    -webkit-box-shadow: inset 0 1px 1px rgba(255,255,255,0.5);
+    -moz-box-shadow: inset 0 1px 1px rgba(255,255,255,0.5);
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.5);
+}
+
+.crumina-dynamic-template-options .ui-slider .ui-slider-handle.ui-state-hover {
+    border-color: #BBBBBB;
+}
+
+.crumina-dynamic-template-options .ui-slider .ui-slider-range {
+    position: absolute;
+    z-index: 1;
+    font-size: .7em;
+    display: block;
+    border: 0;
+    background-position: 0 0;
+}
+
+/* Interaction states
+----------------------------------*/
+.crumina-dynamic-template-options .ui-slider.ui-state-default,
+.crumina-dynamic-template-options .ui-slider.ui-widget-content .ui-state-default,
+.crumina-dynamic-template-options .ui-slider.ui-widget-header .ui-state-default {
+    border: 1px solid #d3d3d3;
+    background: #F5F5F5;
+
+    background-image: -webkit-linear-gradient(to top, #EEEEEE, #F5F5F5);
+    background-image: -moz-linear-gradient(to top, #EEEEEE, #F5F5F5);
+    background-image: -o-linear-gradient(to top, #EEEEEE, #F5F5F5);
+    background-image: -ms-linear-gradient(to top, #EEEEEE, #F5F5F5);
+    background-image: linear-gradient(to top, #EEEEEE, #F5F5F5);
+    font-weight: normal;
+}
+
+
+.crumina-dynamic-template-options .ui-state-default a,
+.crumina-dynamic-template-options .ui-state-default a:link,
+.crumina-dynamic-template-options .ui-state-default a:visited {
+    text-decoration: none;
+}
+.crumina-dynamic-template-options .ui-slider.ui-state-hover,
+.crumina-dynamic-template-options .ui-slider.ui-widget-content .ui-state-hover,
+.crumina-dynamic-template-options .ui-slider.ui-widget-header .ui-state-hover,
+.crumina-dynamic-template-options .ui-slider.ui-state-focus,
+.crumina-dynamic-template-options .ui-slider.ui-widget-content .ui-state-focus,
+.crumina-dynamic-template-options .ui-slider.ui-widget-header .ui-state-focus {
+    border: 1px solid #CFCFCF;
+    background: #EEEEEE;
+    background-image: -webkit-linear-gradient(to top, #EEEEEE, #F5F5F5);
+    background-image: -moz-linear-gradient(to top, #EEEEEE, #F5F5F5);
+    background-image: -o-linear-gradient(to top, #EEEEEE, #F5F5F5);
+    background-image: -ms-linear-gradient(to top, #EEEEEE, #F5F5F5);
+    background-image: linear-gradient(to top, #EEEEEE, #F5F5F5);    
+    font-weight: normal;
+    color: #212121;
+}
+
+.crumina-dynamic-template-options .ui-slider.ui-state-active,
+.crumina-dynamic-template-options .ui-slider.ui-widget-content .ui-state-active,
+.crumina-dynamic-template-options .ui-slider.ui-widget-header .ui-state-active {
+    border: 1px solid #BBBBBB;
+    background: #EEEEEE;
+    font-weight: normal;
+    color: #212121;
+}
+.crumina-dynamic-template-options .ui-state-active a,
+.crumina-dynamic-template-options .ui-state-active a:link,
+.crumina-dynamic-template-options .ui-state-active a:visited {
+    color: #212121;
+    text-decoration: none;
+}
+
+/* Component containers
+----------------------------------*/
+.crumina-dynamic-template-options .ui-widget {
+    font-family: Verdana,Arial,sans-serif;
+    font-size: 1.1em;
+}
+.crumina-dynamic-template-options .ui-widget .ui-widget {
+    font-size: 1em;
+}
+.crumina-dynamic-template-options .ui-widget input,
+.crumina-dynamic-template-options .ui-widget select,
+.crumina-dynamic-template-options .ui-widget textarea,
+.crumina-dynamic-template-options .ui-widget button {
+    font-family: Verdana,Arial,sans-serif;
+    font-size: 1em;
+}
+.crumina-dynamic-template-options .ui-slider.ui-widget-content {
+    border: 1px solid #dfdfdf;
+    color: #222222;
+}
+.crumina-dynamic-template-options .ui-widget-header a {
+    color: #222222;
+}
+
+/* Misc visuals
+----------------------------------*/
+
+/* Corner radius */
+.crumina-dynamic-template-options .ui-corner-all,
+.crumina-dynamic-template-options .ui-corner-top,
+.crumina-dynamic-template-options .ui-corner-left,
+.crumina-dynamic-template-options .ui-corner-tl {
+    border-top-left-radius: 2px;
+}
+
+.crumina-dynamic-template-options .ui-corner-all,
+.crumina-dynamic-template-options .ui-corner-top,
+.crumina-dynamic-template-options .ui-corner-right,
+.crumina-dynamic-template-options .ui-corner-tr {
+    border-top-right-radius: 2px;
+}
+
+.crumina-dynamic-template-options .ui-corner-all,
+.crumina-dynamic-template-options .ui-corner-bottom,
+.crumina-dynamic-template-options .ui-corner-left,
+.crumina-dynamic-template-options .ui-corner-bl {
+    border-bottom-left-radius: 2px;
+}
+
+.crumina-dynamic-template-options .ui-corner-all,
+.crumina-dynamic-template-options .ui-corner-bottom,
+.crumina-dynamic-template-options .ui-corner-right,
+.crumina-dynamic-template-options .ui-corner-br {
+    border-bottom-right-radius: 2px;
+}
+
+
+/* Overlays */
+
+/* For IE8 - See #6727 */
+.crumina-dynamic-template-options .ui-slider.ui-state-disabled .ui-slider-handle,
+.crumina-dynamic-template-options .ui-slider.ui-state-disabled .ui-slider-range {
+    filter: inherit;
+}
+
+.crumina-dynamic-template-options .ui-slider-horizontal {
+    height: .8em;
+}
+.crumina-dynamic-template-options .ui-slider-horizontal .ui-slider-handle {
+    top: -.3em;
+    margin-left: -.6em;
+}
+.crumina-dynamic-template-options .ui-slider-horizontal .ui-slider-range {
+    top: 0;
+    height: 100%;
+}
+.crumina-dynamic-template-options .ui-slider-horizontal .ui-slider-range-min {
+    left: 0;
+}
+.crumina-dynamic-template-options .ui-slider-horizontal .ui-slider-range-max {
+    right: 0;
+}
+
+/**
+ * WordPress Responsive Styles 3.8+
+ * 
+ * The styles below are used to make the admin area
+ * completely responsive.
+ *
+ * @package    WordPress
+ * @author     Sunny Johal - Titanium Themes
+ * @copyright  Copyright (c) 2014, Titanium Themes
+ * @version    1.0
+ * 
+ */
+@media screen and (max-width: 782px) {
+    #wpbody-content #slider-all-pages-column {
+        float: none;
+        margin-bottom: 23px;
+        margin-left: 0;
+        width: 100%;
+    }
+
+    /**
+     * Create/Edit Slider Replacements Page
+     * =====================================
+     *
+     * The following styles are used for the Manage
+     * Slider Replacements Screen.
+     *
+     * @version 1.4
+     * 
+     */
+
+    /* Slider Edit Container Styles */
+
+    #sliders-frame {
+        display: block;
+        margin-top: 23px;
+        margin-left: 0px;
+
+    }    
+}

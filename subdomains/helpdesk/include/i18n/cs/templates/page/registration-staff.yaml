@@ -1,0 +1,4 @@
+---
+notes: Tato šablona definuje úvodní email (volitelné) odeslaný Agentovi pokud je jeho účet vytvořen jeho jménem.
+name: Vítejte do osTicket
+body: '<h3><strong>Ahoj %{recipient.name.first},</strong></h3> <div> Vytvořili jsme pro vás účet v help desku na %{url}.<br /> <br /> Prosím následujte odkaz pro potvrzení vašeho a získání přístupu k vašim tiketům. <br /> <br /> <a href="%{link}">%{link}</a><br /> <br /> <em style="font-size: small">Váš zpřátelený Zákaznický Servis Podpory <br /> %{company.name}</em> </div>'

@@ -1,0 +1,43 @@
+---
+notes: Upozornění zasílané agentům v případě interní aktivity, jako např. přidání interní poznámky, nebo odpovědi agenta na ticket.
+subject: Upozornění na novou interní aktivitu
+body: |
+  <h3><strong>Dobrý den %{recipient.name},</strong></h3>
+  Agent zaznamenal aktivitu u zákaznického požadavku <a
+  href="%{ticket.staff_link}">#%{ticket.number}</a>
+  <br>
+  <br>
+  <table>
+  <tbody>
+  <tr>
+  <td>
+  <strong>Od</strong>:
+  </td>
+  <td>
+  %{note.poster}
+  </td>
+  </tr>
+  <tr>
+  <td>
+  <strong>Název</strong>:
+  </td>
+  <td>
+  %{note.title}
+  </td>
+  </tr>
+  </tbody>
+  </table>
+  <br>
+  %{note.message}
+  <br>
+  <br>
+  <hr>
+  Pro zobrazení požadavku či odpověď na něj, prosím <a
+  href="%{ticket.staff_link}">přihlaste se </a> do systému zákaznická podpory.
+  <br>
+  <br>
+  <em style="font-size: small; ">Váš systém zákaznické podpory
+  </em>
+  <br>
+  <img src="cid:b56944cb4722cc5cda9d1e23a3ea7fbc"
+  alt="Powered by osTicket" width="126" height="19" style="width: 126px;">

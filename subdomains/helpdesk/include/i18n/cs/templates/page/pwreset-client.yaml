@@ -1,0 +1,4 @@
+---
+notes: 'Tato šablona definuje email odeslaný klientům, kteří klikli na odkaz <strong>Zapomněl jsem heslo</strong> na Stránce přihlášení klienta.'
+name: 'Přístup do Helpdesku %{company.name}'
+body: '<h3><strong>Zdravíme %{user.name.first},</strong></h3> <div> Vy nebo někdo jiný požádal o reset hesla do helpdesku na adrese %{url}.<br /> <br /> Pokud cítíte, že je to chyba, smažte tento email a považujte ho za bezpředmětný. Váš účet je stále bezpečný a nikomu do něj nebyl předán přístup. Není zablokovaný a Vaše heslo nebylo resetováno. Někdo mohl chybně zadat Vaši emailovou adresu.<br /> <br /> Pro změnu hesla klepněte na následující odkaz do helpdesku.<br /> <br /> <a href="%{link}">%{link}</a><br /> <br /> <em style="font-size: small">Váš Systém pro podporu zákazníků <br /> %{company.name}</em> </div>'

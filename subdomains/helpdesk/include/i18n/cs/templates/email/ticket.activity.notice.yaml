@@ -1,0 +1,18 @@
+---
+notes: Oznámení odesláno spolupracovníkům lístku, např. odpověď či zpráva.
+subject: 'Re: %{ticket.subject} [#%{ticket.number}]'
+body: |2
+  <h3><strong>Drahý %{recipient.name.first},</strong></h3>
+  <div>
+      <em>%{poster.name}</em> zaznamenal zprávu na lístek, na kterém se podílíte.
+  </div>
+  <br>
+  %{message}
+  <br>
+  <br>
+  <hr>
+  <div style="color: rgb(127, 127, 127); font-size: small; text-align: center;">
+  <em>Tento email jste dostal, protože jste spolupracovník u lístku <a href="%{recipient.ticket_link}" style="color: rgb(84, 141, 212);"
+  >#%{ticket.number}</a>.  Pro účast jednoduše odpovězte na tento email nebo <a href="%{recipient.ticket_link}" style="color: rgb(84, 141, 212);"
+  >klikněte sem</a> pro kompletní archív vlákna lístku.</em>
+  </div>

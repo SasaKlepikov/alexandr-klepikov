@@ -1,0 +1,428 @@
+<?php
+
+/**
+ * @file
+ * Creates a content type for users.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function user_content_type_menu() {
+
+  $items = array();
+
+  $items['admin/config/content/user_content_type'] = array(
+    'title' => 'User Content Type',
+    'description' => 'Settings for User Content Type',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('user_content_type_admin_settings'),
+    'access arguments' => array('administer site configuration'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'user_content_type.admin.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_user_insert().
+ */
+function user_content_type_user_insert(&$edit, $account, $category) {
+  $contenttypes = node_type_get_names();
+
+  // Content type exists and hooks are not disabled.
+  if (isset($contenttypes['user_node']) && !variable_get('user_content_type_disable_hooks', 0)) {
+    _user_content_type_node_update($account);
+  }
+}
+
+/**
+ * Implements hook_user_update().
+ */
+function user_content_type_user_update(&$edit, $account, $category) {
+  $contenttypes = node_type_get_names();
+
+  // Content type exists and hooks are not disabled.
+  if (isset($contenttypes['user_node']) && !variable_get('user_content_type_disable_hooks', 0)) {
+    _user_content_type_node_update($account);
+  }
+}
+
+/**
+ * Implements hook_user_delete().
+ */
+function user_content_type_user_delete($account) {
+  // Hooks are not disabled.
+  if (!variable_get('user_content_type_disable_hooks', 0)) {
+    _user_content_type_node_delete($account);
+  }
+}
+
+/**
+ * Implements hook_field_create_instance().
+ */
+function user_content_type_field_create_instance($instance) {
+  if ($instance['entity_type'] == 'user') {
+
+    // Insert the field instance in user_node.
+    $contenttypes = node_type_get_names();
+    if (isset($contenttypes['user_node'])) {
+      $instance_data = db_query('
+        SELECT data
+        FROM field_config_instance
+        WHERE entity_type = :type
+        AND field_id = :fid
+        AND deleted = 0
+        ', array(':type' => 'user', ':fid' => $instance['field_id']))
+      ->fetchCol();
+
+      db_insert('field_config_instance')
+      ->fields(array(
+        'field_id' => $instance['field_id'],
+        'field_name' => $instance['field_name'],
+        'entity_type' => 'node',
+        'bundle' => 'user_node',
+        'data' => $instance_data[0],
+        'deleted' => 0,
+      ))
+      ->execute();
+    }
+  }
+}
+
+/**
+ * Implements hook_field_update_instance().
+ */
+function user_content_type_field_update_instance($instance, $prior_instance) {
+  if ($instance['entity_type'] == 'user' && ($instance !== $prior_instance)) {
+
+    // Update the field instance in user_node.
+    $contenttypes = node_type_get_names();
+    if (isset($contenttypes['user_node'])) {
+      $instance_data = db_query('
+        SELECT data
+        FROM field_config_instance
+        WHERE entity_type = :type
+        AND field_id = :fid
+        AND deleted = 0
+        ', array(':type' => 'user', ':fid' => $instance['field_id']))
+      ->fetchCol();
+
+      db_update('field_config_instance')
+      ->fields(array(
+        'data' => $instance_data[0],
+        'deleted' => $instance['deleted'],
+      ))
+      ->condition('entity_type', 'node')
+      ->condition('bundle', 'user_node')
+      ->condition('field_id', $instance['field_id'])
+      ->execute();
+    }
+  }
+}
+
+/**
+ * Implements hook_field_delete_instance().
+ */
+function user_content_type_field_delete_instance($instance) {
+  if ($instance['entity_type'] == 'user') {
+
+    // Deletes the field instance in user_node
+    $contenttypes = node_type_get_names();
+    if (isset($contenttypes['user_node'])) {
+      $user_node_instance = field_info_instance('node', $instance['field_name'], 'user_node');
+      if (!is_null($user_node_instance)) {
+        field_delete_instance($user_node_instance);
+      }
+    }
+  }
+}
+
+/**
+ * Create the content type and create nodes for all the existing users.
+ */
+function _user_content_type_build_all() {
+  $contenttypes = node_type_get_names();
+
+  // Content type does not exists, create it first.
+  if (!isset($contenttypes['user_node'])) {
+    // Add new content type.
+    $user_content_type = array(
+      'type' => 'user_node',
+      'name' => 'User',
+      'base' => 'node_content',
+      'module' => 'user_content_type',
+      'description' => 'A node content type for users',
+      'help' => '',
+      'has_title' => 1,
+      'title_label' => 'Username',
+      'custom' => 1,
+      'modified' => 1,
+      'locked' => 0,
+      'disabled' => 0,
+      'orig_type' => 'user_node',
+    );
+
+    $user_content_type = node_type_set_defaults($user_content_type);
+    node_type_save($user_content_type);
+  }
+
+  $existing_fields = field_info_instances("node", "user_node");
+
+  // Add fields.
+  $body_field = variable_get('user_content_type_body', '');
+  if (!empty($body_field) && !isset($existing_fields['body'])) {
+    node_add_body_field($user_content_type);
+  }
+  $user_fields = db_query('
+    SELECT *
+    FROM field_config_instance
+    WHERE entity_type = :type
+    AND deleted = 0
+    ', array(':type' => 'user'))
+  ->fetchAll();
+
+  $fields_to_add = array();
+  foreach ($user_fields as $user_field) {
+    $fields_to_add[] = $user_field->field_name;
+
+    // Field instance doesn't exist, create it.
+    if (!isset($existing_fields[$user_field->field_name])) {
+      db_insert('field_config_instance')
+      ->fields(array(
+        'field_id' => $user_field->field_id,
+        'field_name' => $user_field->field_name,
+        'entity_type' => 'node',
+        'bundle' => 'user_node',
+        'data' => $user_field->data,
+        'deleted' => $user_field->deleted,
+      ))
+      ->execute();
+    }
+    // Field instance already exists, update it.
+    else {
+      db_update('field_config_instance')
+      ->fields(array(
+        'data' => $user_field->data,
+        'deleted' => $user_field->deleted,
+      ))
+      ->condition('entity_type', 'node')
+      ->condition('bundle', 'user_node')
+      ->condition('field_id', $user_field->field_id)
+      ->execute();
+    }
+  }
+
+  // Create the nodes.
+  $all_users = entity_load('user');
+  $user_add_count = 0;
+  $batch_operations = array();
+  foreach ($all_users as $user) {
+    if ($user->uid > 0) {
+      $batch_operations[] = array(
+        '_user_content_type_node_update',
+        array($user, $fields_to_add),
+      );
+      $user_add_count++;
+    }
+  }
+
+  $batch = array(
+    'operations' => $batch_operations,
+    'finished' => '_user_content_type_build_all_finished',
+  );
+
+  batch_set($batch);
+}
+
+/**
+ * Batch 'finished' callback used for building all user nodes.
+ */
+function _user_content_type_build_all_finished($success, $results, $operations) {
+  if ($success) {
+    $user_node_count = db_select('node', 'n')
+      ->fields('n', array('nid'))
+      ->condition('type', 'user_node')
+      ->execute()
+      ->rowCount();
+
+    drupal_set_message(format_plural(
+      $user_node_count,
+      'Successfully created/updated @count user-node in content type "User".',
+      'Successfully created/updated @count user-nodes in content type "User".'
+    ));
+  }
+  else {
+    drupal_set_message(t('An error occurred while trying to build the user nodes'));
+  }
+}
+
+/**
+ * Delete the user_node content type and all of its nodes.
+ */
+function _user_content_type_delete_all() {
+  $contenttypes = node_type_get_names();
+
+  // Content type exists, delete it.
+  if (isset($contenttypes['user_node'])) {
+    // Delete all content.
+    $nids = db_select('node', 'n')
+      ->fields('n', array('nid'))
+      ->condition('type', 'user_node')
+      ->execute()
+      ->fetchCol();
+    node_delete_multiple($nids);
+
+    // Delete field instances.
+    db_delete('field_config_instance')
+      ->condition('bundle', 'user_node')
+      ->execute();
+
+    // Finally delete the content type itself.
+    node_type_delete('user_node');
+
+    drupal_set_message(t('Successfully deleted content type "User" and all of its content.'));
+  }
+}
+
+/**
+ * Updates an already existing user node or creates a new one.
+ *
+ * @param object $user
+ *   The user to update the node for
+ * @param array $fields
+ *   Optional; An array of field ids which have to be updated.
+ *
+ * @return object
+ *   The created/updated node
+ */
+function _user_content_type_node_update($user, $fields = NULL) {
+  $user_nodes = node_load_multiple(array(), array('type' => 'user_node', 'uid' => $user->uid));
+  // No user node existing for this user, create one.
+  if (empty($user_nodes)) {
+    $node = new stdClass();
+    $node->type = 'user_node';
+    $node->language = LANGUAGE_NONE;
+    $node->promote = 0;
+    $node->comment = 0;
+    $node->uid = $user->uid;
+  }
+  // User node already exists for this user.
+  else {
+    $node = array_shift(array_values($user_nodes));
+  }
+
+  $node->status = $user->status;
+  $node->created = $user->created;
+
+  // Add the fields.
+  _user_content_type_update_fields($user, $node, $fields);
+
+  // Save the node.
+  node_save($node);
+
+  return $node;
+}
+
+/**
+ * Delete a user node.
+ *
+ * @param object $user
+ *   The user to delete the node for
+ *
+ * @return bool
+ *   TRUE if a node for the user exists (and could be deleted), FALSE if not
+ */
+function _user_content_type_node_delete($user) {
+  $user_nodes = node_load_multiple(array(), array('type' => 'user_node', 'uid' => $user->uid));
+  if (!empty($user_nodes)) {
+    $node = array_shift(array_values($user_nodes));
+    node_delete($node->nid);
+
+    return TRUE;
+  }
+  else {
+    return FALSE;
+  }
+}
+
+/**
+ * Update a user's fields in the corresponding user node.
+ *
+ * @param object $user
+ *   The user which needs his user node's fields to be updated.
+ * @param object $node
+ *   The user node which gets updated (fields get added here).
+ * @param array $fields
+ *   Optional; An array of field ids which have to be updated.
+ */
+function _user_content_type_update_fields($user, &$node, $fields = NULL) {
+  // Add title.
+  $title_type = variable_get('user_content_type_title', 'username');
+  switch ($title_type) {
+    case 'username':
+      $node->title = $user->name;
+      break;
+
+    case 'title_builder':
+      $node->title = '';
+
+      // Build the title.
+      for ($i = 1; $i <= 3; $i++) {
+        $title_field = variable_get('user_content_type_title_field_' . $i, '');
+        if (!empty($title_field)) {
+          // User has data for this field.
+          $field_exists = (isset($user->{$title_field}) && !empty($user->{$title_field}));
+
+          // This field has an actual value, not only a reference to anything
+          // else (e.g., a taxonomy term). To be expanded in the future.
+          $field_has_value = (isset($user->{$title_field}[LANGUAGE_NONE][0]['value']));
+
+          if ($field_exists && $field_has_value) {
+            if (!empty($node->title)) {
+              $node->title .= ' ';
+            }
+            $node->title .= $user->{$title_field}[LANGUAGE_NONE][0]['value'];
+          }
+        }
+      }
+      break;
+
+    default:
+      $node->title = '';
+      break;
+  }
+
+  // Add body.
+  $body_field = variable_get('user_content_type_body', '');
+  if (!empty($body_field)) {
+    $node->body[LANGUAGE_NONE][0]['value'] = '';
+
+    // User has data for this field.
+    $field_exists = (isset($user->{$body_field}) && !empty($user->{$body_field}));
+
+    // This field has an actual value, not only a reference to anything
+    // else (e.g., a taxonomy term). To be expanded in the future.
+    $field_has_value = (isset($user->{$body_field}[LANGUAGE_NONE][0]['value']));
+
+    if ($field_exists && $field_has_value) {
+      $node->body[LANGUAGE_NONE][0]['value'] .= $user->{$body_field}[LANGUAGE_NONE][0]['value'];
+    }
+  }
+
+  // Add all the other fields.
+  if (is_null($fields) || !is_array($fields)) {
+    $fields = db_query('
+      SELECT field_name
+      FROM field_config_instance
+      WHERE entity_type = :type
+    ', array(':type' => 'user'))
+    ->fetchCol();
+  }
+  foreach ($fields as $field) {
+    if (isset($user->{$field})) {
+      $node->{$field} = $user->{$field};
+    }
+  }
+}

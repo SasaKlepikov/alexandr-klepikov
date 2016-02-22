@@ -1,0 +1,277 @@
+<?php
+/**
+ * @file
+ * Allows cck fields with multiple values to be paginated
+ *
+ * @author psegno - http://www.psegno.it
+ * @version this is the drupal 7.x version
+ */
+
+/**
+ * Implement hook_help().
+ */
+function cck_pager_help($section) {
+  switch ($section) {
+    case 'admin/help#cck_pager':
+      return t('<p><strong>CCK Pager</strong> allows to page the item list of any CCK field with multiple values.</p> 
+        <p>The module reimplements all the formatters defineds by all the others CCK modules and extends them by paging the field item list; setting the number of elements per page can be made globally or per field.</p>
+        <p>&nbsp;</p><h3>Example of usage</h3> <h4>Photogallery</h4> <p>With CCK Pager, you can create a simple photogallery, here\'s an example:</p> <ol> <li>enable imagecache module and set a preset for the thumbnails.</li> <li>enable the lightbox2 module.</li> 
+        <li>create a content type "photogallery" and add a image field with unlimited cadinality.</li> 
+        <li>enable the cck_pager module.</li> <li>change the display settings of the field by selecting the image formatter "Pager: Lightbox2: [imagecache_preset] -&gt; original".</li> <li>set the number of items displayed per page globally or for the field.</li> <li>create a photogallery by inserting how many images you want.</li> </ol> <p>This procedure can be used with all types of CCK field, such as filefield and emfield.</p> <p><strong><a href="/cck_pager_photogallery">Try out a demonstration</a></strong></p>');
+    case 'admin/modules#description':
+      return t('Allows cck fields with multiple values to be paginated.');
+  }
+}
+
+/**
+ * Implement hook_form_FORM_ID_alter().
+ */
+function cck_pager_form_field_ui_field_settings_form_alter(&$form, &$form_state) {
+  $entity_info = entity_get_info($form['#entity_type']);  
+  $field = field_info_field($form['field']['field_name']['#value']);
+  if ($field['cardinality']  != 1) {
+    $form['field']['settings']['cck_pager'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('CCK Pager settings'),
+      '#weight' => 5,
+      '#collapsible' => TRUE,
+      '#collapsed' => FALSE,
+      '#tree' => TRUE,
+    );
+    
+      // remove the #markup key which was stopping the new settings from rendering
+      unset($form['field']['settings']['#markup']);
+    foreach ($entity_info['view modes'] as $key => $view_mode) {
+      $settings = isset($field['settings']['cck_pager'][$key]) ? $field['settings']['cck_pager'][$key] : NULL;
+      $form['field']['settings']['cck_pager'][$key] = array(
+        '#type' => 'fieldset',
+        '#title' => t($view_mode['label']),
+        '#weight' => 5,
+        '#collapsible' => TRUE,
+        '#collapsed' => isset($settings['enabled']) ? !$settings['enabled'] : TRUE,
+      );
+      $form['field']['settings']['cck_pager'][$key]['enabled'] = array(
+        '#type' => 'checkbox',
+        '#title' => t('Enable cck pager for this build mode.'),
+        '#default_value' => isset($settings['enabled']) ? $settings['enabled'] : FALSE,
+      );
+      $form['field']['settings']['cck_pager'][$key]['limit'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Items per page'),
+        '#size' => 20,
+        '#maxlength' => 128,
+        '#required' => FALSE,
+        '#weight' => 1,
+        '#default_value' => isset($settings['limit']) ? $settings['limit'] : 10,
+      );
+      $form['field']['settings']['cck_pager'][$key]['query_param'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Query param'),
+        '#size' => 20,
+        '#maxlength' => 128,
+        '#weight' => 2,
+        '#default_value' => isset($settings['query_param']) ? $settings['query_param'] : '',
+      );
+      $form['field']['settings']['cck_pager'][$key]['maxpagerpages'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Max pager pages'),
+        '#size' => 20,
+        '#maxlength' => 128,
+        '#weight' => 3,
+        '#default_value' => isset($settings['maxpagerpages']) ? $settings['maxpagerpages'] : 9,
+      );
+      $form['field']['settings']['cck_pager'][$key]['pager_type'] = array(
+        '#type' => 'radios',
+        '#title' => t('Pager type'),
+        '#options' => array(t('Full pager'), t('Mini pager')),
+        '#weight' => 4,
+        '#default_value' => isset($settings['pager_type']) ? $settings['pager_type'] : 0,
+      );
+    }
+  }
+}
+
+/**
+ * Implement hook_field_attach_view_alter().
+ */
+function cck_pager_field_attach_view_alter(&$output, $context) {
+  foreach (element_children($output) as $field_name) {
+    $element = $output[$field_name];
+    $total = count($element['#items']);
+    $field = field_info_field($field_name);
+    if (isset($field['settings']['cck_pager'][$element['#view_mode']])) {
+      $settings = $field['settings']['cck_pager'][$element['#view_mode']];
+      if ($settings['enabled'] && $total > 1) {
+        // Field params
+        $limit = (isset($settings['limit']) && $settings['limit'] > 0) ? $settings['limit'] : 10;
+        $query_param = (empty($settings['query_param'])) ? 'cck_pager' .'_'. $field_name : $settings['query_param'];
+        $maxpagerpages = (isset($settings['maxpagerpages'])) ? $settings['maxpagerpages'] : 9;
+        $pager_type = (isset($settings['pager_type'])) ? $settings['pager_type'] : 0;
+        // Pager variables
+        $num_pages = ceil($total / $limit);
+        $page = (isset($_GET[$query_param])) ? $_GET[$query_param] : 0;
+        $start = $page * $limit;
+        $offset = $limit * ($page + 1);
+        // Rendering
+        for ($i = 0; $i < $total; $i++) {
+          if ($i < $start || $i >= $offset) {
+            unset($output[$field_name]['#items'][$i]);
+          }
+        }
+        $pager = _cck_pager_build_pager($num_pages, $page, $query_param, $maxpagerpages, $pager_type);
+        $data = array('pager' => $pager);
+        $context = array(
+         'num_pages' => $num_pages,
+         'page' => $page,
+         'query_param' => $query_param,
+         'pager_type' => $pager_type,
+        );
+
+        drupal_alter('cck_pager', $data, $field, $context);
+        extract($data);
+        if (is_array($pager)) {
+          global $base_url;
+          if (in_array($query_param, array_keys($_GET))) {
+            $canonical_url = $base_url . url('node/'. $output[$field_name]['#object']->nid);
+            drupal_add_html_head('<link rel="canonical" href="'. $canonical_url .'" />');
+          }
+          $output[$field_name]['#cck_pager_pager'] = $pager;
+          $output[$field_name]['#post_render'][] = 'cck_pager_field_post_render';
+        }
+      }
+    }
+  }
+}
+
+/*
+ * Post render function: add the pager to the content.
+ */
+function cck_pager_field_post_render($output, $element) {
+  return theme('cck_pager_content', array('output' => $output, 'element' => $element));
+}
+
+/**
+ * Implement hook_theme().
+ */
+function cck_pager_theme($existing, $type, $theme, $path) {
+  return array(
+    'cck_pager_content' => array(
+      'variables' => array('output' => NULL, 'element' => 0),
+    ),
+  );
+}
+
+/**
+ * Pager theming function.
+ */
+function theme_cck_pager_content($variables) {
+  $item_list_variables = array(
+    'items' => $variables['element']['#cck_pager_pager'],
+    'title' => NULL,
+    'type' => 'ul',
+    'attributes' => array('class' => 'pager'),
+  );
+  return '<div class="cck_pager">'. $variables['output'] . theme('item_list', $item_list_variables)  .'</div>';
+}
+
+/**
+ * Build pager.
+ */
+function _cck_pager_build_pager($num_pages, $page, $query_param, $maxpagerpages, $mini_pager = FALSE) {
+  $items = array();
+  $pager_middle = ceil($maxpagerpages / 2);
+  $pager_current = $page + 1; 
+  $pager_first = $pager_current - $pager_middle + 1; 
+  $pager_last = $pager_current + $maxpagerpages - $pager_middle;
+  $pager_max = $num_pages;
+  $i = $pager_first;
+  if ($pager_last > $pager_max) {
+    $i = $i + ($pager_max - $pager_last);
+    $pager_last = $pager_max;
+  }
+  if ($i <= 0) {
+    $pager_last = $pager_last + (1 - $i);
+    $i = 1;
+  }
+  if ($num_pages > 1) {
+    if ($page > 0) {
+      if (!$mini_pager) {
+        $items[] = array(
+          'class' => array('pager-first'),
+          'data' => _cck_pager_link(t('« first'), $query_param, 0),
+        );  
+      }
+      $items[] = array(
+        'class' => array('pager-previous'),
+        'data' => _cck_pager_link(($mini_pager) ? '‹' : t('‹ previous'), $query_param, ($page - 1)),
+      );
+    }
+    if (!$mini_pager) {
+      if ($i <= $pager_max) {
+        if ($i > 1) {
+          $items[] = array(
+            'class' => array('pager-ellipsis'),
+            'data' => '…',
+          );
+        }
+        for (; $i <= $pager_last && $i <= $pager_max; $i++) {
+          if ($i < $pager_current) {
+            $items[] = array(
+              'class' => array('pager-item'),
+              'data' => _cck_pager_link($i, $query_param, $i - 1),
+            );
+          }
+          if ($i == $pager_current) {
+            $items[] = array(
+              'class' => array('pager-current'),
+              'data' => $i,
+            );
+          }
+          if ($i > $pager_current) {
+            $items[] = array(
+              'class' => array('pager-item'),
+              'data' => _cck_pager_link($i, $query_param, $i - 1),
+            );
+          }
+        }
+        if ($pager_last < $pager_max) {
+          $items[] = array(
+            'class' => array('pager-ellipsis'),
+            'data' => '…',
+          );
+        }
+      }
+    }
+    if ($pager_current < $pager_max) {
+      $items[] = array(
+        'class' => array('pager-next'),
+        'data' => _cck_pager_link(($mini_pager) ? '›' : t('next ›'), $query_param, ($page + 1))
+      );
+      if (!$mini_pager) {
+        $items[] = array(
+          'class' => array('pager-last'),
+          'data' => _cck_pager_link(t('last »'), $query_param, $num_pages - 1),
+        );
+      }
+    }
+  }
+  return $items;
+}
+
+/**
+ * Build links with all query params
+ */
+function _cck_pager_link($text, $query_param, $page) {
+  $qargs = $_GET;
+  $excluded = array('q', 'pass');
+  if ($page !== 0) {
+    $qargs[$query_param] = $page;
+  }
+  else {
+    $excluded[] = $query_param;
+  }
+  $query = array();
+  $query += drupal_get_query_parameters($qargs, array_merge($excluded, array_keys($_COOKIE)));
+  // $query = drupal_http_build_query($query);
+  return l($text, $_GET['q'], array('query' => $query));
+}

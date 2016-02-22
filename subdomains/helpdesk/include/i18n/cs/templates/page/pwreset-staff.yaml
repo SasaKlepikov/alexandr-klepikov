@@ -1,0 +1,4 @@
+---
+notes: 'Tato šablona definuje email, který bude poslán po kliknutí na <strong>Zapomenuté heslo</strong> v přihlašovací stránce.'
+name: Obnovit zapomenuté heslo pro zaměstnance
+body: '<h3><strong>Dobrý den %{staff.name.first},</strong></h3> <div> Žádost o obnovení hesla byla podána vašim jménem v helpdesku na %{url}.<br /> <br /> Pokud máte pocit, že se takto stalo omylem, smažte a ignorujte tento email. Váš účet je stále v bezpečí a nikomu nebyl umožněn přístup k němu. Není uzamčen a heslo nebylo obnoveno. Někdo mohl omylem zadat vači emailovou adresu.<br /> <br /> Následujte náže uvedený odkaz pro přihlášení do helpdesku a změnu vašeho hesla.<br /> <br /> <a href="%{link}">%{link}</a><br /> <br /> <em style="font-size: small">Váš  Systém zákaznické podpory</em> <br /> <img src="cid:b56944cb4722cc5cda9d1e23a3ea7fbc" alt="Powered by osTicket" width="126" height="19" style="width: 126px" /> </div>'

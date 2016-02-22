@@ -1,0 +1,28 @@
+---
+password_reset:
+  title: Zásady pro vypršení platnosti hesla
+  content: 'Nastaví jak často (v měsících) budou zaměstnanci nuceni si změnit jejich heslo. Jestliže je toto vypnuto (nastaveno "bez vypršení platnosti hesla"), platnost hesla nikdy neskončí.'
+password_expiration_policy:
+  title: Zásady pro vypršení platnosti hesla
+  content: 'Zvolte, jak často musí agenti měnit své heslo. Je-li zakázáno (tedy <span class="doc-desc-opt">bez vypršení hesla</span>), hesla nikdy nevyprší.'
+allow_password_resets:
+  title: Povolit obnovení hesla
+  content: 'Zapni tuto vlastnost jestli chceš, aby byl zobrazován odkaz <span class="doc-desc-title">Zapoměl jsem heslo </span> na <span class="doc-desc-title">přihlašovací stránce </span> po chybném pokusu o přihlášení.'
+reset_token_expiration:
+  title: Okno obnovení hesla
+  content: 'Zvol jak dlouho (v minutách) bude <span class="doc-desc-title"> žádost o změnu hesla </span> platná. Když si agent zažádá o  <span class="doc-desc-title">reset hesla</span>, email  na reset hesla je po tuto dobu platný.'
+staff_session_timeout:
+  title: Vypršel časový limit zaměstnance
+  content: 'Vyber maximální délku nečinnosti (v minutách), než je agent automaticky odhlášen. <br><br> Jestliže chceš <span class="doc-desc-title">automatické odhlašování zaměstnanců</span> vypnout, vyber 0.'
+client_session_timeout:
+  title: Vypršel časový limit uživatele
+  content: 'Vyber maximální délku nečinnosti (v minutách), než je uživatel automaticky odhlášen. <br><br> Jestliže chceš <span class="doc-desc-title">automatické odhlašování uživatele </span> vypnout, vyber 0.'
+bind_staff_session_to_ip:
+  title: Svázat relaci zaměstnance s IP adresou
+  content: 'Zapnout, pokud chcete, aby byl agent zapamatován podle jeho IP adresy při přihlášení.<br><br>  Toto nastavení není doporučeno pro uživatele, kteří mají dynamicky přidělované IP adresy.'
+registration_method:
+  title: Nastavení registrace
+  content: '<span class="doc-desc-title">Technika registrace</span> a <span class="doc-desc-title">registrace vyžadována</span> se používají společně k tomu, jak se uživatelé registrují a přistupují webový portál helpdesku . Tabulka níže shrnuje, jak je toto nastavení vykládáno systémem. <table border="1" cellpadding="2px" cellspacing="0" style="margin-top:7px" ><tbody style="vertical-align:top;"> <tr><th>Registratce vyžadována</th> <th>Technika registrace</th> <th>Výsledky</th></tr> <tr><td>No</td><td>Veřejný</td> <td>Registrace se doporučuje, ale nevyžaduje se pro nové tikety.</td></tr> <tr><td>Yes</td><td>Public</td> <td>Registrace and login jsou vyžadovány pro nové tikety</td></tr> <tr><td>No</td><td>Soukromé</td> <td>Kdokoliv může vytvořit tiket, ale jen agenti mohou registrovat účty</td></tr> <tr><td>Yes</td><td>Soukromé</td> <td>Uživatelský přístup je pouze na základě pozvánky.</td></tr> <tr><td>No</td><td>Zakázáno</td> <td>Nikdo nemůže zaregistrovat účet, ale každý může vytvořit tiket. <em>Takto to fungovalo před verzí  1.9</em></td></tr> <tr><td>Yes</td><td>Zakázáno</td> <td>Zakázat vytváření tiketů přes webový portál</td></tr> </tbody></table>'
+client_verify_email:
+  title: Vyžadovat ověření emailem
+  content: 'Zakázáním této volby dáte uživatelům okamžitý přístup k tiketům přes "Zjisti stav tiketu" přihlašovací stránku webového portálu. Jestliže je povoleno (výchozí), uživatelům bude zasílán mail s linkem na tento tiket. <br><br>Zakázáním ověřování mailu by mohl umožnit třetím stranám (např spolupracovníci tiketů) se vydávat za majitele tiketů.'
