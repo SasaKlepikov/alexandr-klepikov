@@ -13067,7 +13067,7 @@ Don’t hesitate to buy our theme, we’re working on new updates, features.</em
 		<wp:status>publish</wp:status>
 		<wp:post_parent>983</wp:post_parent>
 		<wp:menu_order>79</wp:menu_order>
-		<wp:post_type>nav_menu_item</wp:post_type>
+		<wp:post_type>nav_menu_item</wp:post_type>
 		<wp:post_password></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
 		<category domain="nav_menu" nicename="top-menu"><![CDATA[Top menu]]></category>
@@ -17726,7 +17726,7 @@ As a new WordPress user, you should go to <a href="http://test.3/wp-admin/">your
 		</wp:postmeta>
 	</item>
 	<item>
-				<title>Retro bike</title>
+				<title>Retro bike</title>
 		<link>http://test.3/?portfolio=portfolio-9</link>
 		<pubDate>Fri, 29 Aug 2014 07:43:09 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>

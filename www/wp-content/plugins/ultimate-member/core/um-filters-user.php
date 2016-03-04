@@ -27,7 +27,9 @@
 
 		$actions = null;
 		
-		if ( !um_user('super_admin') ) {
+		um_fetch_user( um_profile_id() );
+
+		if ( current_user_can('manage_options') ) {
 		
 			if ( um_user('account_status') == 'awaiting_admin_review' ){
 				$actions['um_approve_membership'] = array( 'label' => __('Approve Membership','ultimatemember') );
@@ -64,7 +66,27 @@
 			$actions['um_switch_user'] = array( 'label' => __('Login as this user','ultimatemember') );
 		}
 		
-		um_fetch_user( um_profile_id() );
+		
 		
 		return $actions;
 	}
+
+
+	/**
+	 * Filter user basename
+	 * @param  string $value 
+	 * @return string
+	 * @hook_filter: um_clean_user_basename_filter       
+	 */
+	add_filter('um_clean_user_basename_filter','um_clean_user_basename_filter',2,10);
+	function um_clean_user_basename_filter( $value, $raw ){
+		
+		// Checks if last name has dash
+		if( ! empty( $value ) && strrpos( $value ,"_") > -1 ){
+			$value = str_replace( '_', '-', $value );
+		}
+
+		return $value;
+
+	}
+

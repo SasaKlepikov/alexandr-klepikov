@@ -7,7 +7,7 @@ Tags: access control, author, authors, author profile, comments, community, comm
 Requires at least: 4.1
 Tested up to: 4.4
 
-Stable Tag: 1.3.38
+Stable Tag: 1.3.42
 
 License: GNU Version 2 or Any Later Version
 
@@ -148,6 +148,66 @@ The plugin works with popular caching plugins by automatically excluding Ultimat
 16. Screenshot 16
 
 == Changelog ==
+
+= 1.3.42: March 3, 2016 =
+* Fixed: email template and localization
+* Fixed: redirect URL
+
+= 1.3.41: March 3, 2016 =
+* Fixed: Registration form redirect url
+
+= 1.3.40: March 3, 2016 =
+
+* New: filter `um_<field_type>_form_show_field` for display field
+* New: shortcode: show custom content to specific role [um_show_content roles='member'][/um_show_content]
+* New: 'not' attribute to [um_show_content not='member,contributor'][/um_show_content] shortcode
+* Tweak: update masonry script
+* Tweak: sql concatenate with prepare statement
+* Fixed: remove notices
+* Fixed: missing mCSB_buttons.png
+* Fixed: set Gravatar default image as UM default image
+* Fixed: fix default gravatar image
+* Fixed: select2 multi dropdown for wc orders
+* Fixed: show admin bar option
+* Fixed: session issue with logout
+* Fixed: register using email address if it exists
+* Fixed: duplicate full_name permalinks
+* Fixed: duplicate profile
+* Fixed: show admin bar for non-logged in users
+* Fixed: honorifics in full name
+* Fixed: unsynced wp role
+* Fixed: display wp user role filters
+* Fixed: select and radio invalid value
+* Fixed: email template path
+* Fixed: user profile url with single dash in the last name
+* Fixed: function to check meta value existence by meta key
+* Fixed: um-admin-dashboard warnings
+* Fixed: community role field in profile edit screen
+* Fixed: mismatched roles
+* Fixed: admin access in profiles
+* Fixed: allow multiple member directory shortcode in a page
+* Fixed: datepicker for ios and safari
+* Fixed: adding of members in wp-admin
+* Fixed: Fix redirection and XSS issue in login form
+
+= 1.3.39: February 24, 2016 =
+
+* New: add gravatar transfer tool
+* New: show users with gravatar photo in member directory
+* New: add upgrade class for data migration
+* Tweak: Set last login for new users to show in member directory
+* Tweak: validate roles for forms without fields
+* Tweak: cropper js update
+* Tweak: update minified script
+* Tweak: tooltip and comment
+* Fixed: member search query
+* Fixed: Registration process with pending and show message enabled
+* Fixed: Fix form security validation
+* Fixed: email content type, template and localization
+* Fixed: remove php notices
+* Fixed: custom columns for roles
+* Fixed: admin bar visibility per user role
+* Fixed: community role editing
 
 = 1.3.38: February 19, 2016 =
 

@@ -136,7 +136,7 @@
 		
 		// Priority redirect
 		if ( isset( $args['redirect_to'] ) ) {
-			exit( wp_redirect( $args['redirect_to'] ) );
+			exit( wp_redirect(  urldecode( $args['redirect_to'] ) ) );
 		}
 		
 		// Role redirect

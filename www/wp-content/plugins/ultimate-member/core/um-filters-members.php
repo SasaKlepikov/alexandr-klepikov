@@ -126,11 +126,25 @@
 		$query_args['meta_query']['relation'] = 'AND';
 
 		// must have a profile photo
-		if ( $has_profile_photo == 1 ) {
+		if ( $has_profile_photo == 1 && ! um_get_option('use_gravatars') ) {
 			$query_args['meta_query'][] = array(
-				'key' => 'profile_photo',
-				'value' => '',
-				'compare' => '!='
+				'relation' => 'OR',
+				array(
+					'key' => 'synced_profile_photo', // addons
+					'value' => '',
+					'compare' => '!='
+				),
+				array(
+					'key' => 'profile_photo', // from upload form
+					'value' => '',
+					'compare' => '!='
+				),
+				array(
+					'key' => 'synced_gravatar_hashed_id', //  gravatar
+					'value' => '',
+					'compare' => '!='
+				)
+				
 			);
 		}
 
@@ -142,6 +156,7 @@
 				'compare' => '!='
 			);
 		}
+
 
 		// show specific usernames
 		if ( isset( $show_these_users ) && $show_these_users && is_array( $show_these_users ) ) {
@@ -166,6 +181,7 @@
 		$query_args['order'] = 'ASC';
 
 		if ( isset( $sortby ) ) {
+
 
 			if ( $sortby == 'other' && $sortby_custom ) {
 
@@ -223,3 +239,4 @@
 
 		return $result;
 	}
+

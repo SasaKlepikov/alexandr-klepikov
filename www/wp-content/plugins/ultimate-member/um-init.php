@@ -13,6 +13,7 @@ class UM_API {
 		require_once um_path . 'core/um-short-functions.php';
 
 		if (is_admin()) {
+			require_once um_path . 'admin/core/um-admin-upgrade.php';
 			require_once um_path . 'admin/um-admin-init.php';
 		}
 
@@ -50,6 +51,11 @@ class UM_API {
 		$this->addons['bp_avatar_transfer'] = array(
 			__('BuddyPress Avatar Transfer', 'ultimatemember'),
 			__('This add-on enables you to migrate your custom user photos from BuddyPress to use with Ultimate Member.', 'ultimatemember'),
+		);
+
+		$this->addons['gravatar_transfer'] = array(
+			__('Gravatar Transfer', 'ultimatemember'),
+			__('This add-on enables you to link gravatar photos to user accounts with their email address.', 'ultimatemember'),
 		);
 
 	}
