@@ -6,8 +6,9 @@
  *
  * Available variables:
  * - $name: the display name of the map
- * - $map_id: a unique ID for the map.
- *   to identify the map container.
+ * - $lat: The latitude of the marker for the map being displayed
+ * - $lng: The longitude of the marker for the map being displayed
+ * - $zoom: The zoom factor of the map being displayed
  */
 
 ?>

@@ -2,8 +2,37 @@
 
 /**
  * @file
- * Defines schema for google_map fields
+ * Defines schema for google_map fields.
  */
+
+ /**
+  * Implements hook_requirements().
+  */
+ function google_map_field_requirements($phase) {
+   $requirements = array();
+
+   if ($phase == 'runtime') {
+     $t = get_t();
+     $jquery = drupal_get_library('system', 'jquery');
+     $minimum_ver = '1.7';
+
+     if (version_compare($jquery['version'], $minimum_ver, '>=')) {
+       $severity = REQUIREMENT_OK;
+       $description = t('Required minimum jQuery version are fulfilled.');
+     } else {
+       $severity = REQUIREMENT_WARNING;
+       $description = t('Site theme AND the admin theme needs to be in jQuery %minimum_ver version or above. Please use the <a href="@link">jQuery Update</a> module to set this.', array('%jquery' => $jquery['version'], '%minimum_ver' => '1.7', '@link' => url('https://www.drupal.org/project/jquery_update')));
+     }
+     $requirements['google_map_field'] = array(
+       'title' => $t('Google Map Field'),
+       'severity' => $severity,
+       'value' => t('Current jQuery: %jquery', array('%jquery' => $jquery['version'])),
+       'description' => $description,
+     );
+   }
+
+   return $requirements;
+ }
 
 /**
  * Implements hook_field_schema().

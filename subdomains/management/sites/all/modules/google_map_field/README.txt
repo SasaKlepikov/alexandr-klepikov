@@ -14,7 +14,7 @@ Current Maintainer: Scot Hubbard - http://drupal.org/user/868214
 
 This module  allows content creators/maintainers to add maps to content via
 the addition of a "Google Map Field" field type that can be added to content
-types.
+types
 
 Using the google map field, the user can drop a marker on a map, set the
 width, height and zoom factor of the map and save the data for the map

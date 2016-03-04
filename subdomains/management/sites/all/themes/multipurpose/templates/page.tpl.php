@@ -84,7 +84,7 @@
       $twitter_url = check_plain(theme_get_setting('twitter_url', 'multipurpose')); 
       $facebook_url = check_plain(theme_get_setting('facebook_url', 'multipurpose')); 
       $google_plus_url = check_plain(theme_get_setting('google_plus_url', 'multipurpose')); 
-      $pinterest_url = check_plain(theme_get_setting('pinterest_url', 'multipurpose'));
+      $linkedin_url = check_plain(theme_get_setting('linkedin_url', 'multipurpose'));
       ?>
       <div id="header-social" class="clr">
         <ul>
@@ -97,8 +97,8 @@
           <?php if ($google_plus_url): ?><li>
             <a target="_blank" title="<?php print $site_name; ?> in Google+" href="<?php print $google_plus_url; ?>"><img alt="Google+" src="<?php print base_path() . drupal_get_path('theme', 'multipurpose') . '/images/social/google.png'; ?>"> </a>
           </li><?php endif; ?>
-          <?php if ($pinterest_url): ?><li>
-            <a target="_blank" title="<?php print $site_name; ?> in Pinterest" href="<?php print $pinterest_url; ?>"><img alt="Pinterest" src="<?php print base_path() . drupal_get_path('theme', 'multipurpose') . '/images/social/pinterest.png'; ?>"> </a>
+          <?php if ($linkedin_url): ?><li>
+            <a target="_blank" title="<?php print $site_name; ?> in LinkedIn" href="<?php print $linkedin_url; ?>"><img alt="LinkedIn" src="<?php print base_path() . drupal_get_path('theme', 'multipurpose') . '/images/social/linkedin.png'; ?>"> </a>
           </li><?php endif; ?>
           <li>
             <a target="_blank" title="<?php print $site_name; ?> in RSS" href="<?php print $front_page; ?>rss.xml"><img alt="RSS" src="<?php print base_path() . drupal_get_path('theme', 'multipurpose') . '/images/social/rss.png'; ?>"> </a>

@@ -2,7 +2,7 @@
 /**
  * @file
  * This file contains the javascript functions used to display a map when the
- * entity it is attached to is displayed.
+ * entity it is attached to is displayed
  */
 
 /**
@@ -27,13 +27,23 @@ var google_map_field_map;
       var lat = $(this).attr('data-lat');
       var lon = $(this).attr('data-lng');
       var zoom = parseInt($(this).attr('data-zoom'));
+      var S = Drupal.settings.googleMapField;
 
       // Create the map coords and map options.
       var latlng = new google.maps.LatLng(lat, lon);
       var mapOptions = {
         zoom: zoom,
         center: latlng,
-        streetViewControl: false,
+        disableDoubleClickZoom: S.disableDoubleClickZoom,
+        draggable: S.draggable,
+        keyboardShortcuts: S.keyboardShortcuts,
+        noClear: S.noClear,
+        panControl: S.panControl,
+        rotateControl: S.rotateControl,
+        scaleControl: S.scaleControl,
+        scrollwheel: S.scrollwheel,
+        streetViewControl: S.streetViewControl,
+        zoomControl: S.zoomControl,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       };
       google_map_field_map = new google.maps.Map(this, mapOptions);

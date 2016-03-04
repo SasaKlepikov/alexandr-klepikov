@@ -3,8 +3,8 @@
 /**
  * @file
  * This file defines all the necessary hooks and functions to create
- * a Google Map Field field type and also a WYSIWYG editor plugin
- * for inserting maps directly into filtered content.
+ * a Google Map Field field type for inserting maps directly into
+ * content items (node, entities etc).
  */
 
 /**
@@ -32,25 +32,18 @@ function google_map_field_permission() {
 }
 
 /**
- * Implements hook_init().
- */
-function google_map_field_init() {
-  google_map_field_add_maps_api();
-}
-
-/**
  * Implements hook_menu().
  */
 function google_map_field_menu() {
   $items = array();
 
-  $items['admin/config/google-map-field-apikey'] = array(
-    'title' => 'Google Map Field API Key',
-    'description' => 'Set your Google Maps API key.',
+  $items['admin/config/development/google-map-field'] = array(
+    'title' => 'Google Map Field',
+    'description' => 'Google Maps Field config page.',
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('google_map_field_apikey_settings_form'),
+    'page arguments' => array('google_map_field_settings_form'),
     'file' => 'includes/google_map_field.admin.inc',
-    'access arguments' => array('access google map api key'),
+    'access arguments' => array('access google map config'),
   );
 
   return $items;
@@ -156,8 +149,15 @@ function google_map_field_field_formatter_view($object_type, $object, $field, $i
  * called by google_map_field_field_formatter_view().
  */
 function google_map_field_format_field($item, $delta, $display) {
+  require module_load_include('inc', 'google_map_field');
 
+  $js_settings = array();
+  foreach($settings as $type_name => $data) {
+    $js_settings[$type_name] = variable_get('google_map_field_'.$type_name, $data['default']);
+  }
+  drupal_add_js(array('googleMapField' => $js_settings), 'setting');
   drupal_add_js(drupal_get_path('module', 'google_map_field') . '/js/google_map_field_node_display.js', 'file');
+  google_map_field_add_maps_api();
 
   $element = array(
     '#type' => 'container',
@@ -188,6 +188,11 @@ function google_map_field_format_field($item, $delta, $display) {
  */
 function google_map_field_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
 
+  $form['#attached']['js'][] = google_map_field_get_protocol() . 'maps.googleapis.com/maps/api/js?sensor=false';
+
+  $field_id = is_a($element['#entity'], 'FieldCollectionItemEntity') ? $element['#entity']->item_id : $field['id'];
+  $field_id = empty($field_id) ? rand(10000000, 99999999) : $field_id;
+
   $element['#title'] = t('Define Location');
   $element['#description'] = '<p>' . t('To set a location for the map, click the "Set Map Marker" button, or enter the latitude/longitude in the field provided.') . '</p>';
 
@@ -209,18 +214,17 @@ function google_map_field_field_widget_form(&$form, &$form_state, $field, $insta
     ),
   );
 
-  if (isset($instance['default_value'][0])) {
-    $name = isset($items[$delta]['name']) ? $items[$delta]['name'] : $instance['default_value'][0]['name'];
-    $lat  = isset($items[$delta]['lat']) ? $items[$delta]['lat'] : $instance['default_value'][0]['lat'];
-    $lng  = isset($items[$delta]['lon']) ? $items[$delta]['lon'] : $instance['default_value'][0]['lon'];
-    $zoom = isset($items[$delta]['zoom']) ? $items[$delta]['zoom'] : $instance['default_value'][0]['zoom'];
-  }
-  else {
-    $name = isset($items[$delta]['name']) ? $items[$delta]['name'] : NULL;
-    $lat  = isset($items[$delta]['lat']) ? $items[$delta]['lat'] : NULL;
-    $lng  = isset($items[$delta]['lon']) ? $items[$delta]['lon'] : NULL;
-    $zoom = isset($items[$delta]['zoom']) ? $items[$delta]['zoom'] : NULL;
-  }
+  $defaults = array(
+    'name'    =>  isset($instance['default_value'][0]['name']) ? $instance['default_value'][0]['name'] : t('Default'),
+    'lat'     =>  isset($instance['default_value'][0]['lat']) ? $instance['default_value'][0]['lat'] : 51.524295,
+    'lon'     =>  isset($instance['default_value'][0]['lon']) ? $instance['default_value'][0]['lon'] : -0.1279899999999543,
+    'zoom'    =>  isset($instance['default_value'][0]['zoom']) ? $instance['default_value'][0]['zoom'] : 9,
+  );
+
+  $name = isset($items[$delta]['name']) ? $items[$delta]['name'] : '';
+  $lat  = isset($items[$delta]['lat']) ? $items[$delta]['lat'] : '';
+  $lng  = isset($items[$delta]['lon']) ? $items[$delta]['lon'] : '';
+  $zoom = isset($items[$delta]['zoom']) ? $items[$delta]['zoom'] : '';
 
   $element['name'] = array(
     '#type' => 'textfield',
@@ -229,6 +233,7 @@ function google_map_field_field_widget_form(&$form, &$form_state, $field, $insta
     '#prefix' => '<div class="google-map-field-fields-container">',
     '#attributes' => array(
       'data-name-delta' => $delta,
+      'data-name-field-id' => $field_id,
     ),
   );
   $element['lat'] = array(
@@ -239,6 +244,10 @@ function google_map_field_field_widget_form(&$form, &$form_state, $field, $insta
     '#default_value' => $lat,
     '#attributes' => array(
       'data-lat-delta' => $delta,
+      'data-lat-field-id' => $field_id,
+      'class' => array(
+        'google-map-field-watch-change',
+      ),
     ),
   );
   $element['lon'] = array(
@@ -249,6 +258,10 @@ function google_map_field_field_widget_form(&$form, &$form_state, $field, $insta
     '#default_value' => $lng,
     '#attributes' => array(
       'data-lng-delta' => $delta,
+      'data-lng-field-id' => $field_id,
+      'class' => array(
+        'google-map-field-watch-change',
+      ),
     ),
   );
   $element['zoom'] = array(
@@ -257,20 +270,56 @@ function google_map_field_field_widget_form(&$form, &$form_state, $field, $insta
     '#default_value' => $zoom,
     '#attributes' => array(
       'data-zoom-delta' => $delta,
+      'data-zoom-field-id' => $field_id,
+      'class' => array(
+        'google-map-field-watch-change',
+      ),
+    ),
+  );
+
+  $element['enter_defaults'] = array(
+    '#type' => 'button',
+    '#value' => t('Defaults'),
+    '#attributes' => array(
+      'id' => 'enter_defaults_' . $field_id . '_' . $delta,
+      'data-delta' => $delta,
+      'data-field-id' => $field_id,
+      'data-default-name' => $defaults['name'],
+      'data-default-lat' => $defaults['lat'],
+      'data-default-lon' => $defaults['lon'],
+      'data-default-zoom' => $defaults['zoom'],
+      'class' => array(
+        'google-map-field-defaults',
+      ),
+    ),
+  );
+
+  $element['clear_fields'] = array(
+    '#type' => 'button',
+    '#value' => t('Clear Fields'),
+    '#attributes' => array(
+      'data-delta' => $delta,
+      'data-field-id' => $field_id,
+      'id' => 'clear_fields_' . $field_id . '_' . $delta,
+      'class' => array(
+        'google-map-field-clear',
+      ),
     ),
     '#suffix' => '</div>',
   );
+
   $element['map_preview_' . $delta] = array(
     '#type' => 'container',
     '#prefix' => '<div class="google-map-field-setter-container">',
-    '#suffix' => '<div><strong>' . t('Map Preview') . '</strong></div><div class="google-map-field-preview" date-field-name="' . $field['field_name'] . '" data-delta="' . $delta . '"></div>',
+    '#suffix' => '<div><strong>' . t('Map Preview') . '</strong></div><div class="google-map-field-preview" date-field-name="' . $field['field_name'] . '" data-field-id="' . $field_id . '" data-delta="' . $delta . '"></div>',
   );
   $element['open_map'] = array(
     '#type' => 'button',
     '#value' => t('Set Map Marker'),
     '#attributes' => array(
       'data-delta' => $delta,
-      'id' => 'map_setter_' . $delta,
+      'data-field-id' => $field_id,
+      'id' => 'map_setter_' . $field_id . '_' . $delta,
       'data-field-name' => $field['field_name'],
     ),
     '#suffix' => '</div><div style="clear: both;"></div>',
@@ -283,7 +332,23 @@ function google_map_field_field_widget_form(&$form, &$form_state, $field, $insta
  * Custom validation function for latitude/longitude fields.
  */
 function google_map_field_latlon_validate($element, $form, &$form_state) {
-  if (!is_numeric($element['#value']) && !empty($element['#value'])) {
+
+  $invalid = FALSE;
+
+  switch ($element['#parents'][count($element['#parents']) - 1]) {
+    case 'lat':
+      if ($element['#value'] < -90 || $element['#value'] > 90) {
+        $invalid = TRUE;
+      }
+      break;
+    case 'lon':
+      if ($element['#value'] < -180 || $element['#value'] > 180) {
+        $invalid = TRUE;
+      }
+      break;
+  }
+
+  if ((!is_numeric($element['#value']) && !empty($element['#value'])) || $invalid) {
     $field = implode('][', $element['#array_parents']);
     form_set_error($field, t('Invalid value - @title', array('@title' => $element['#title'])));
   }
@@ -300,7 +365,7 @@ function google_map_field_theme($existing, $type, $theme, $path) {
           'name' => NULL,
           'lat' => NULL,
           'lng' => NULL,
-          'lzoom' => NULL,
+          'zoom' => NULL,
         ),
         'template' => 'google-map-field',
         'path' => drupal_get_path('module', 'google_map_field') . '/theme',
@@ -317,12 +382,12 @@ function google_map_field_add_maps_api() {
   if (variable_get('google_map_field_apikey', '') != '') {
     $element = array(
       '#type' => 'markup',
-      '#markup' => '<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?sensor=false&key=' . variable_get('google_map_field_apikey', '') . '"></script>',
+      '#markup' => '<script type="text/javascript" src="' . google_map_field_get_protocol() . 'maps.googleapis.com/maps/api/js?sensor=false&key=' . variable_get('google_map_field_apikey', '') . '"></script>',
     );
     drupal_add_html_head($element, 'google_maps_api');
   }
   else {
-    drupal_add_js('//maps.googleapis.com/maps/api/js?sensor=false', 'external');
+    drupal_add_js(google_map_field_get_protocol() . 'maps.googleapis.com/maps/api/js?sensor=false', 'external');
   }
 }
 
@@ -339,4 +404,16 @@ function google_map_field_get_fields() {
     }
   }
   return $fields;
+}
+
+/**
+ * Helper function to return current protocol.
+ */
+function google_map_field_get_protocol() {
+  if (isset($_SERVER['HTTPS'])) {
+    return 'HTTPS://';
+  }
+  else {
+    return 'http://';
+  }
 }

@@ -72,10 +72,10 @@ function multipurpose_form_system_theme_settings_alter(&$form, &$form_state) {
     '#default_value' => theme_get_setting('google_plus_url', 'multipurpose'),
     '#description'   => t("Enter your Google Plus URL. Leave blank to hide."),
   );
-  $form['multipurpose_settings']['socialicon']['pinterest_url'] = array(
+  $form['multipurpose_settings']['socialicon']['linkedin_url'] = array(
     '#type' => 'textfield',
-    '#title' => t('Pinterest Address'),
-    '#default_value' => theme_get_setting('pinterest_url', 'multipurpose'),
-    '#description'   => t("Enter your Pinterest URL. Leave blank to hide."),
+    '#title' => t('LinkedIn Address'),
+    '#default_value' => theme_get_setting('linkedin_url', 'multipurpose'),
+    '#description'   => t("Enter your LinkedIn URL. Leave blank to hide."),
   );
 }

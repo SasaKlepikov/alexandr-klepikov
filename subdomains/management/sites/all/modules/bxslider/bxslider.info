@@ -4,7 +4,6 @@ dependencies[] = image
 dependencies[] = libraries (>=2.x)
 dependencies[] = jquery_update
 
-files[] = bxslider.css
 files[] = bxslider.test
 
 version = 7.x-1.x-dev
@@ -12,9 +11,9 @@ core = 7.x
 
 
 
-; Information added by Drupal.org packaging script on 2015-01-12
-version = "7.x-1.1"
+; Information added by Drupal.org packaging script on 2015-07-02
+version = "7.x-1.2"
 core = "7.x"
 project = "bxslider"
-datestamp = "1421057138"
+datestamp = "1435829040"
 
